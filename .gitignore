@@ -159,6 +159,12 @@ ENV/
 env.bak/
 venv.bak/
 
+.venv/
+data/raw/*.graphml
+data/raw/*.gpkg
+*.pyc
+.ipynb_checkpoints/
+
 # Spyder project settings
 .spyderproject
 .spyproject

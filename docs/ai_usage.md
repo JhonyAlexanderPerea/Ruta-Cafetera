@@ -1,0 +1,1 @@
+# Documentación del uso de IA dentro del proyecto
