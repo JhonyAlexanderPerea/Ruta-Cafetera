@@ -1,0 +1,13 @@
+{
+  "nombre": "radio_20km",
+  "consulta": "point(4.5325757482519915, -75.67300446053777) dist=20km",
+  "servidor": "https://maps.mail.ru/osm/tools/overpass/api",
+  "network_type": "drive",
+  "fecha_descarga": "2026-11-09",
+  "osmnx": "2.1.1",
+  "nodos": 8773,
+  "aristas": 20045,
+  "tamano_mb": 12.03,
+  "segundos_descarga": 1383.1,
+  "sha256": "a1f53bc38724ed4ef00bbc58ace3015c679ef5551994cf44116d55b04eccf6c5"
+}

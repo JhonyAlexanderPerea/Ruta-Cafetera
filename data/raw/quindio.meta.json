@@ -1,0 +1,13 @@
+{
+  "nombre": "quindio",
+  "consulta": "Quindío, Colombia",
+  "servidor": "https://maps.mail.ru/osm/tools/overpass/api",
+  "network_type": "drive",
+  "fecha_descarga": "2026-11-09",
+  "osmnx": "2.1.1",
+  "nodos": 8807,
+  "aristas": 20153,
+  "tamano_mb": 12.34,
+  "segundos_descarga": 513.2,
+  "sha256": "5a6223a008d91c06d8cac66a1bbfaf35c20a9701471a75e5c84682d7559785a8"
+}
