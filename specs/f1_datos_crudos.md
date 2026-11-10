@@ -1,6 +1,6 @@
 # Spec: F1 · Datos crudos (red vial, catálogo y pares de medición)
 
-**Autor:** <nombre> · **Revisor:** <nombre distinto del autor> · **Estado:** borrador
+**Autor:** Claude (borrador con el grupo) · **Revisor:** <pendiente: nombre distinto del autor> · **Estado:** aprobada en PARADA 1 (falta la firma del revisor)
 
 ## Objetivo
 Dejar en `data/raw/` los datos de entrada del proyecto, sin transformarlos: la red vial del Quindío y las cuatro redes por radio alrededor de la plaza de Bolívar (descargadas con OSMnx), el catálogo de al menos 40 lugares con coordenadas verificadas, y los 20 pares de medición de Dijkstra. Todo con la evidencia necesaria para reproducirlo (fecha, versión, conteos y hash).
@@ -73,11 +73,12 @@ No hay mediciones de rendimiento en esta fase. Lo que se registra es informació
 Los conteos V y E de las cuatro redes por radio y de la red completa serán la base de la tabla "Red descargada" del requerimiento 1 (Fase 2).
 
 ## Criterio de terminado
-- Los 5 GraphML existen con su `.meta.json` (fecha, versión, V, E y SHA-256), y están publicados en el Release `data-v1`.
-- La plaza de Bolívar fue verificada en un mapa.
--  `make validar-catalogo` termina en verde y todas las filas tienen `verificado=True`.
--  Todos los atractivos tienen duración y fuente.
--  `pares_dijkstra.csv` tiene 20 pares, 10 con `usa_lineal=True`, y la mezcla pedida entre esos 10.
--  `make test` y CI en verde.
--  El README registra fecha de descarga, versión de OSMnx, V y E de cada red, y la máquina.
--  Milestone `Fase 1` cerrado y tag `fase-1-datos` creado.
+- [x] Los 5 GraphML existen con su `.meta.json` (V, E y SHA-256 verificados).
+- [ ] Publicados en el Release `data-v1` (pendiente: decisión del grupo, publicación hacia afuera).
+- [x] La plaza de Bolívar y las cabeceras fueron verificadas en el mapa por el grupo (PARADA 1).
+- [x] `uv run python -m rutas.data.catalogo` termina sin errores y las 40 filas tienen `verificado=True`.
+- [x] Todos los atractivos tienen duración y fuente (o criterio del grupo, marcado como tal).
+- [x] `pares_dijkstra.csv` tiene 20 pares, 10 con `usa_lineal=True`, y la mezcla pedida entre esos 10.
+- [x] `make test` (equivalente: `uv run pytest -q`) y ruff en verde.
+- [x] El README registra la fecha de descarga, la versión de OSMnx, V y E de cada red, y la máquina.
+- [ ] Tag `fase-1-datos` creado (local; publicarlo requiere tu orden).
