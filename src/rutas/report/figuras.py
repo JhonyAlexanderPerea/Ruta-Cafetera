@@ -31,10 +31,12 @@ def _guardar(fig, salida: Path) -> None:
 
 def figura_r1(rows: list[dict], salida: Path) -> None:
     fig, ax = plt.subplots(figsize=(6, 4))
-    for r in rows:
+    for i, r in enumerate(rows):
         x, y = float(r["V_mas_E"]), float(r["tiempo_ms"])
         ax.scatter(x, y, color="tab:blue")
-        ax.annotate(r["red"], (x, y), textcoords="offset points", xytext=(4, 4))
+        # Alterna la altura de la etiqueta: redes casi del mismo tamaño se pisan.
+        ax.annotate(r["red"], (x, y), textcoords="offset points",
+                    xytext=(4, 4 if i % 2 == 0 else -12))
     ax.set(xscale="log", yscale="log", xlabel="V + E (elementos)",
            ylabel="Tiempo (ms)", title="R1: tiempo de componente conexa vs V+E")
     _guardar(fig, salida)
