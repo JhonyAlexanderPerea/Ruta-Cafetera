@@ -41,3 +41,29 @@ def test_resultado_y_metadatos_pequenos():
 
     assert m.completed is True
     assert isinstance(m.extra, dict)
+
+
+def _preparar_datos_lentos(n):
+    # Simula preparación pesada: la serialización de este argumento no debe contar.
+    return [list(range(1000)) for _ in range(n)]
+
+
+def contar(datos):
+    return len(datos)
+
+
+def test_preparacion_de_datos_queda_fuera_del_cronometro():
+    import functools
+    import time as _time
+
+    datos = _preparar_datos_lentos(20000)
+    fn = functools.partial(contar, datos)
+
+    t0 = _time.perf_counter()
+    m = runner.measure(fn, reps=2, timeout_s=60)
+    total_s = _time.perf_counter() - t0
+
+    assert m.completed is True
+    # La llamada a `contar` tarda microsegundos; el resto (transferencia, arranque) no cuenta.
+    assert m.median_ms < 200
+    assert total_s >= m.median_ms / 1000
