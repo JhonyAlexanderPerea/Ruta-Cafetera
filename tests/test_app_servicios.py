@@ -16,12 +16,12 @@ RAIZ = Path(__file__).resolve().parents[1]
 
 
 def _grafo_pequeno() -> CSRGraph:
-    # 0 -> 1 (60 s), 1 -> 2 (120 s), 0 -> 2 (300 s). El nodo 2 no sale a ningún lado.
+    # 0->1 (60 s), 0->2 (300 s), 1->2 (120 s). El nodo 2 no sale a ningún lado.
     return CSRGraph(
         indptr=np.array([0, 2, 3, 3], dtype=np.int64),
         indices=np.array([1, 2, 2], dtype=np.int32),
         dist_m=np.array([10.0, 20.0, 50.0]),
-        time_s=np.array([60.0, 120.0, 300.0]),
+        time_s=np.array([60.0, 300.0, 120.0]),
     )
 
 
