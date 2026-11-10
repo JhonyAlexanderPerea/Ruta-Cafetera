@@ -1,4 +1,5 @@
 """Descarga las redes viales crudas (sin modificar) y guarda sus metadatos."""
+
 from __future__ import annotations
 
 import argparse
@@ -19,7 +20,7 @@ from rutas.config import DATA_RAW
 PLACE = "Quindío, Colombia"
 NETWORK_TYPE = "drive"
 # (lat, lon) de la plaza de Bolívar de Armenia. VERIFICAR en el mapa antes de descargar.
-PLAZA_BOLIVAR = (4.5325757482519915, -75.67300446053777) 
+PLAZA_BOLIVAR = (4.5325757482519915, -75.67300446053777)
 RADIOS_KM = (2, 5, 10, 20)
 # Tiempo máximo de espera por red (s). Decisión del grupo, ver docs/decisiones.md.
 TIMEOUT_POR_RADIO_S = {2: 90, 5: 180, 10: 360, 20: 720}
@@ -44,6 +45,7 @@ ERRORES_DESCARGA = (
     InsufficientResponseError,
     ResponseStatusCodeError,
 )
+
 
 def _sha256(path) -> str:
     h = hashlib.sha256()
