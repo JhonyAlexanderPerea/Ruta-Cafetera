@@ -12,7 +12,7 @@ Actualizado: 2026-11-10. Fase actual: **Fase 4 (R2, caminos mínimos)**.
 | 4. R2 Dijkstra | **En curso**: algoritmos y tests hechos (54 pasan); faltan experimentos y spec | Rama `feat/f4-dijkstra` |
 | 5. R3 envolvente | Pendiente | PARADA 5 |
 | 6. R4 viajante | Pendiente | PARADA 6 |
-| 7. R5 aplicación | Pendiente | Carpeta `app/` no creada |
+| 7. R5 aplicación | **Lista para PARADA 7**: app, servicios, figuras y tests hechos (169 pasan); falta que una persona ajena la levante con el README y revise la spec | `specs/r5_aplicacion.md`, rama `feat/f7-app` |
 | 8. Documento técnico | Pendiente | Redacción con el grupo |
 
 ## PR abiertos
