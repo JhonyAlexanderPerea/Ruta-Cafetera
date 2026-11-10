@@ -1,4 +1,4 @@
-.PHONY: install test lint format app
+.PHONY: install test lint format app validar-catalogo
 
 install:
 	uv sync --all-groups
@@ -12,5 +12,8 @@ lint:
 format:
 	uv run ruff format .
 
+validar-catalogo:
+	uv run python -m rutas.data.catalogo
+
 app:
-	uv run streamlit run app/streamlit_app.py
+	@echo 'La app todavía no existe (Fase 7).' && exit 1

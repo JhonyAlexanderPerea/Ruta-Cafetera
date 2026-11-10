@@ -16,15 +16,20 @@ Fecha: 2026-11-10. Estado al cierre de la Fase 1 (tag `fase-1-datos`).
 5. **Rancho San Antonio:** el pin de Google queda a unos 40 m de Ecohotel Piedemonte. El grupo lo aprobó tal como está.
 
 ## Pendientes técnicos
-6. **Cita de complejidad de componentes fuertes (R1.3):** sigue como `[CITA POR VERIFICAR]` en `specs/r1_modelo_red.md`.
+6. **Cita de complejidad de componentes fuertes (R1.3):** resuelto. Se cita Tarjan (1972) y la función real de NetworkX 3.7 que usa OSMnx. El acceso al artículo no se revisó en línea.
 7. **Supuesto de rutas nacionales (D10):** 50 km/h sin dato explícito; aprobado como supuesto, no verificado.
 8. **Medición de `largest_component` (Fase 3):** no está hecha. El runner está listo (`src/rutas/bench/runner.py`), pero faltan `bench/machine_info.py` y `bench/io.py`.
 9. **Timeouts intermedios de descarga (D2):** 180, 360 y 720 s son propuesta nuestra; el grupo debe confirmarlos.
 10. **Makefile:** el spec F1 menciona `make validar-catalogo`, que no existe. El validador se corre con `uv run python -m rutas.data.catalogo`. Hay que corregir el spec o agregar el target.
-11. **Target `make app`:** apunta a `app/streamlit_app.py`, que aún no existe (Fase 7).
+10. **Target `make app`:** resuelto. Ahora muestra un mensaje claro de que la app está pendiente (Fase 7).
 12. **Formato automático:** `ruff format` tocó `src/rutas/data/descarga.py` (commit de estilo separado, sin cambios de lógica).
 
 ## Riesgos conocidos
 - **Release `data-v1`** apunta a la rama `fix/auditoria-discrepancias`, no a `develop` ni a `main`. Al mergear el PR conviene revisar que el tag y el release sigan bien.
 - **Medición en Windows:** `spawn` obliga a que la función y sus argumentos sean serializables. Por eso las funciones medidas deben estar en módulos importables.
 - **Overpass:** la descarga depende de servidores públicos que no siempre responden (en esta sesión `overpass-api.de` estuvo inaccesible). Si se vuelve a descargar, puede tardar más de una hora.
+
+## Nota sobre la tabla de vecinos (Génova)
+- El grupo indicó que el vecino más cercano de Génova es Pijao, y que Córdoba o Buenavista están cerca.
+- Con los polígonos de OSM, Génova toca solo a Pijao. Buenavista está a unos 4 km y Córdoba a unos 10 km, sin frontera común.
+- Pendiente de decisión: mantener la regla "comparten frontera" o agregar Génova–Buenavista como vecinos. Eso cambiaría los pares lineales.

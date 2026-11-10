@@ -39,7 +39,7 @@ El tiempo es una **estimación del modelo**, no el tiempo real de recorrido.
 
 ## Complejidad esperada (con fuente)
 - **Pesos:** tiempo O(E), memoria O(E).
-- **Componente fuertemente conexa (algoritmo interno de OSMnx/NetworkX):** tiempo O(V+E) con el algoritmo de Tarjan o de Kosaraju. *Fuente por verificar en la versión instalada: [CITA POR VERIFICAR].*
+- **Componente fuertemente conexa:** `ox.truncate.largest_component(strongly=True)` (OSMnx 2.1.1) llama a `nx.strongly_connected_components` (NetworkX 3.7), implementado con una versión iterativa del algoritmo de Tarjan (documentación de NetworkX 3.7, referencia a Tarjan y Zwick). Tiempo O(V+E) y memoria O(V+E): Tarjan, R. E. (1972), "Depth-First Search and Linear Graph Algorithms", *SIAM Journal on Computing* 1(2), pp. 146–160. Verificado en el código instalado; la cota O(V+E) viene del artículo de 1972 y su acceso no se revisó en línea.
 - **Conversión a CSR:** tiempo O(V+E log E) por el ordenamiento de las aristas; memoria O(V+E).
 - **Asociación de lugares (fuerza bruta con NumPy):** tiempo O(L·V), con L lugares y V nodos; memoria O(V).
 - **Estimación de memoria (con los valores reales, V = 8.791, E = 19.973):**
