@@ -1,13 +1,13 @@
 id,nombre,municipio,categoria,lat,lon,duracion_visita_min,fuente_duracion,fuente_coord,verificado
-cab_01,Plaza de Bolívar,Armenia,cabecera,4.5325725,-75.6730412,,,OSM relación 3871094 (Plaza de Bolívar; Armenia). Plaza de Bolívar; centroide de OSM,False
-cab_02,Buenavista (cabecera),Buenavista,cabecera,4.359481,-75.7384206,,,"Google Maps: Parque Principal Buenavista; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
-cab_03,Calarcá (cabecera),Calarcá,cabecera,4.5305485,-75.6405365,,,"Google Maps: Plaza Mayor de Calarcá; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_01,Plaza de Bolívar,Armenia,cabecera,4.5325725,-75.6730412,,,OSM relación 3871094 (Plaza de Bolívar; Armenia). Plaza de Bolívar; centroide de OSM,True
+cab_02,Buenavista (cabecera),Buenavista,cabecera,4.359481,-75.7384206,,,"Google Maps: Parque Principal Buenavista; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
+cab_03,Calarcá (cabecera),Calarcá,cabecera,4.5305485,-75.6405365,,,"Google Maps: Plaza Mayor de Calarcá; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
 cab_04,Circasia (cabecera),Circasia,cabecera,4.6201245,-75.6346655,,,"Google Maps: Parque Principal; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
 cab_05,Córdoba (cabecera),Córdoba,cabecera,4.3901136,-75.6854897,,,"Google Maps: Parque Principal De Córdoba; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
 cab_06,Filandia (cabecera),Filandia,cabecera,4.6747808,-75.6581641,,,"Google Maps: Parque Principal de Filandia; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
 cab_07,Génova (alcaldía),Génova,cabecera,4.2065017,-75.7906184,,,"OSM: Plaza de Bolívar de Génova; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
-cab_08,La Tebaida (cabecera),La Tebaida,cabecera,4.4519718,-75.7869536,,,"Google Maps: Parque Luis Arango Cardona (Plaza Nueva); dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
-cab_09,Montenegro (cabecera),Montenegro,cabecera,4.5671697,-75.7504826,,,"Google Maps: Parque Principal Montenegro - Plaza de Bolívar; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
-cab_10,Pijao (cabecera),Pijao,cabecera,4.3341233,-75.7038431,,,"OSM: Parque Principal de Pijao; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
-cab_11,Quimbaya (cabecera),Quimbaya,cabecera,4.6224862,-75.7630803,,,"Google Maps: Plaza de Bolívar Quimbaya; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
-cab_12,Salento (cabecera),Salento,cabecera,4.6372361,-75.5698171,,,"OSM: Plaza de Bolívar de Salento; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_08,La Tebaida (cabecera),La Tebaida,cabecera,4.4519718,-75.7869536,,,"Google Maps: Parque Luis Arango Cardona (Plaza Nueva); dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
+cab_09,Montenegro (cabecera),Montenegro,cabecera,4.5671697,-75.7504826,,,"Google Maps: Parque Principal Montenegro - Plaza de Bolívar; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
+cab_10,Pijao (cabecera),Pijao,cabecera,4.3341233,-75.7038431,,,"OSM: Parque Principal de Pijao; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
+cab_11,Quimbaya (cabecera),Quimbaya,cabecera,4.6224862,-75.7630803,,,"Google Maps: Plaza de Bolívar Quimbaya; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
+cab_12,Salento (cabecera),Salento,cabecera,4.6372361,-75.5698171,,,"OSM: Plaza de Bolívar de Salento; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",True
