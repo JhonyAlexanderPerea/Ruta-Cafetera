@@ -1,0 +1,5 @@
+conjunto,n,vertices,tiempo_propio_ms,tiempo_scipy_ms,cociente,coinciden
+nodos_de_la_red,8791,14,59.75,3.35,17.84,True
+cuadrado_1000,1000,22,6.81,2.3,2.96,True
+cuadrado_10000,10000,24,70.65,3.87,18.26,True
+cuadrado_50000,50000,30,414.41,10.41,39.81,True

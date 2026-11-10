@@ -78,3 +78,26 @@ Registro de decisiones relevantes: qué se decidió, alternativas y por qué. Ca
 - **Decidido por:** el grupo, en PARADA 2. Se acepta el supuesto.
 - **Qué:** troncales de ruta nacional (ref 40 o 29) sin `maxspeed` usan 50 km/h, igual que la primaria.
 - **Se documenta como supuesto**, no como dato. La mediana de las rutas nacionales con velocidad explícita (30 km/h) mezcla tramos urbanos y no sirve como referencia.
+
+## D12. Algoritmo de envolvente convexa (R3, PARADA 5)
+
+- **Decidido por:** el grupo, tras comparar las dos opciones (fusión por tangentes y QuickHull).
+- **Qué:** divide y vencerás con **fusión por tangentes**. Puntos ordenados por (x, y), mitades recursivas, y en la fusión se buscan las tangentes inferior y superior entre las dos envolventes.
+- **Por qué:** es divide y vencerás en su forma clásica, sin discusión sobre la clasificación. La recurrencia es T(n) = 2T(n/2) + O(n), así que O(n log n) en el peor caso, sin depender de la distribución de los puntos. La profundidad de la recursión es log₂ n.
+- **Alternativa descartada:** QuickHull. Es más simple y puede ser más rápido en la práctica, pero su peor caso es O(n²) y su clasificación como divide y vencerás se debe justificar.
+- **Coordenadas:** enteros (UTM redondeado), aritmética exacta. Puntos colineales sobre un lado no son vértices. Si todos son colineales, se devuelven los dos extremos.
+- **Verificación:** 49 tests (casos a mano, colineales, duplicados, 1, 2 y 3 puntos, circunferencia, 40 nubes aleatorias contra SciPy) y 300 casos de estrés (nubes uniformes, rejillas con muchas colineales y cúmulos). Todos coinciden con `scipy.spatial.ConvexHull`.
+- **Resultados:** `results/r3_envolvente.csv`. El tiempo propio es entre 3 y 40 veces el de SciPy, porque SciPy/Qhull está implementado en C y el nuestro en Python puro. Para 10.000 → 50.000 puntos el tiempo crece unas 5,9 veces, coherente con n log n.
+
+## D13. Heurística voraz para el viajante (R4, aprobada en PARADA 6)
+
+- **Propuesta:** vecino más cercano dirigido. Desde la partida se va siempre al lugar no visitado de menor tiempo `c[actual][j]`, y al final se regresa a la partida.
+- **Por qué:** es la voraz más simple y se puede explicar en una línea; su costo es O(k²).
+- **Resultado:** brecha promedio entre 8,7 % y 11,4 %, y brecha máxima de 25,4 % en k = 12 (5 instancias por k, `results/r4_heuristica.csv`).
+- **Ejemplo:** en una instancia de 5 lugares, la voraz da 11.803 s y el óptimo de Held-Karp 10.956 s (`results/r4_ejemplo_voraz.csv`). Ese ejemplo muestra que la voraz no garantiza el óptimo, a diferencia de Dijkstra, donde la elección voraz sí es correcta porque los pesos no son negativos.
+
+## D14. Itinerario de un día (R4, aprobado en PARADA 6)
+
+- **Atractivos:** se toman al azar del catálogo (semilla 42), solo de la categoría atractivo, sin Armenia. Es un criterio provisional; el grupo puede elegirlos a mano.
+- **Regla de corte:** se empieza con 8. Si visitas + desplazamientos superan las 11 h (660 min), en cada paso se quita el atractivo cuya eliminación reduce más la duración total, hasta que quepa o queden 6.
+- **Resultado:** 6 atractivos, 450 min de visitas y 10,18 h en total (`results/r4_itinerario.csv`). Cumple el rango de 6 a 8.

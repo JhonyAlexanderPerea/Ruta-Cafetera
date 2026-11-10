@@ -1,0 +1,21 @@
+{
+  "procesador": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+  "nucleos_fisicos": 4,
+  "nucleos_logicos": 8,
+  "ram_gb": 17.1,
+  "so": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.16",
+  "librerias": {
+    "osmnx": "2.1.1",
+    "networkx": "3.7",
+    "numpy": "2.5.4",
+    "pyproj": "3.8.0",
+    "scipy": "1.18.1"
+  },
+  "commit": "779d20c27c7fe6ca3349a9a2c24a0fe98892d91c",
+  "fecha": "2026-11-10T05:46:29+00:00",
+  "semilla": 42,
+  "repeticiones": 5,
+  "limite_s": 300,
+  "partida": "cab_01"
+}
