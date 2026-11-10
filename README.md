@@ -42,3 +42,17 @@ Descarga: 2026-11-09 con OSMnx 2.1.1, desde `maps.mail.ru` (Overpass).
 | Departamento | 8.807 | 20.153 |
 
 Procesamiento (R1): componente fuertemente conexa del departamento con 8.791 nodos y 20.132 aristas; CSR con 19.973 aristas (tras quitar 122 paralelas y 37 bucles).
+## Ejecutar la aplicación (R5)
+Comando:
+
+```
+uv run streamlit run app/streamlit_app.py
+```
+
+Requisito: `data/processed/graph_csr.npz` (junto con `places.csv`, `nodes.csv` y `hull.json`), generado por el pipeline de R1 y no versionado. No necesita OSMnx. Opcional: `RUTAS_DATA_DIR` apunta la app a otra carpeta de datos procesados (se usa en las pruebas).
+
+Vistas (menú lateral):
+- **Ruta:** elige origen y destino por nombre; muestra el tiempo en minutos y la ruta en un mapa.
+- **Envolvente:** polígono de la envolvente convexa del departamento con los lugares como marcadores.
+- **Itinerario:** elige partida y de 6 a 8 atractivos; compara el recorrido óptimo (Held-Karp) con el voraz y avisa si supera 11 h.
+- **Resultados:** tablas de `results/` (con su unidad de tiempo) y las gráficas de `figures/`.
