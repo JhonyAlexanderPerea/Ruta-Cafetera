@@ -89,14 +89,14 @@ Registro de decisiones relevantes: qué se decidió, alternativas y por qué. Ca
 - **Verificación:** 49 tests (casos a mano, colineales, duplicados, 1, 2 y 3 puntos, circunferencia, 40 nubes aleatorias contra SciPy) y 300 casos de estrés (nubes uniformes, rejillas con muchas colineales y cúmulos). Todos coinciden con `scipy.spatial.ConvexHull`.
 - **Resultados:** `results/r3_envolvente.csv`. El tiempo propio es entre 3 y 40 veces el de SciPy, porque SciPy/Qhull está implementado en C y el nuestro en Python puro. Para 10.000 → 50.000 puntos el tiempo crece unas 5,9 veces, coherente con n log n.
 
-## D13. Heurística voraz para el viajante (R4, PARADA 6, pendiente de aprobación)
+## D13. Heurística voraz para el viajante (R4, aprobada en PARADA 6)
 
 - **Propuesta:** vecino más cercano dirigido. Desde la partida se va siempre al lugar no visitado de menor tiempo `c[actual][j]`, y al final se regresa a la partida.
 - **Por qué:** es la voraz más simple y se puede explicar en una línea; su costo es O(k²).
 - **Resultado:** brecha promedio entre 8,7 % y 11,4 %, y brecha máxima de 25,4 % en k = 12 (5 instancias por k, `results/r4_heuristica.csv`).
 - **Ejemplo:** en una instancia de 5 lugares, la voraz da 11.803 s y el óptimo de Held-Karp 10.956 s (`results/r4_ejemplo_voraz.csv`). Ese ejemplo muestra que la voraz no garantiza el óptimo, a diferencia de Dijkstra, donde la elección voraz sí es correcta porque los pesos no son negativos.
 
-## D14. Itinerario de un día (R4, PARADA 6, pendiente de aprobación)
+## D14. Itinerario de un día (R4, aprobado en PARADA 6)
 
 - **Atractivos:** se toman al azar del catálogo (semilla 42), solo de la categoría atractivo, sin Armenia. Es un criterio provisional; el grupo puede elegirlos a mano.
 - **Regla de corte:** se empieza con 8. Si visitas + desplazamientos superan las 11 h (660 min), en cada paso se quita el atractivo cuya eliminación reduce más la duración total, hasta que quepa o queden 6.
