@@ -20,3 +20,10 @@ fi_05,Hotel Mirador de Boquía,Salento,finca,4.640797,-75.582965,,,Google Maps (
 fi_06,Hospedaje Casa Borbón,Salento,finca,4.636469,-75.569047,,,Google Maps ('Hospedaje Casa Borbón Salento'); dentro del polígono OSM de Salento. Tarifa económica (propuesta, confirmar),False
 fi_07,Eco Hotel El Colibrí,Salento,finca,4.590192,-75.633462,,,Google Maps ('Eco Hotel El Colibrí'); dentro del polígono OSM de Salento. Tarifa económica (propuesta, confirmar),False
 fi_08,Finca Tradicional Cafetera El Placer,Armenia,finca,4.5102817,-75.7504255,,,Google Maps ('Finca Tradicional Cafetera el placer'); dentro del polígono OSM de Armenia. Tarifa económica (propuesta, confirmar),False
+at_14,Mirador de Filandia,Filandia,atractivo,4.6685211,-75.6651374,,,Google Maps ('Mirador de Filandia'); dentro del polígono OSM de Filandia,False
+at_15,Mirador en las manos de Dios,Salento,atractivo,4.6347381,-75.5766946,,,Google Maps ('Mirador en las manos de Dios'); dentro del polígono OSM de Salento. Nombre tal como aparece en Google,False
+ac_01,Trilladora de la Cooperativa de Caficultores del Quindío,Montenegro,acopio,4.565726,-75.7555954,,,Google Maps ('Trilladora de la Cooperativa de Caficultores del Quindío'); dentro del polígono OSM de Montenegro,False
+ac_02,Cooperativa de Caficultores - compra de café Calarcá,Calarcá,acopio,4.5290536,-75.6435899,,,Google Maps ('Cooperativa de Caficultores del Quindío - Compra de Café Calarcá'); dentro del polígono OSM de Calarcá,False
+ac_03,Cooperativa de Caficultores - compra de café Armenia,Armenia,acopio,4.5185719,-75.6902503,,,Google Maps ('Cooperativa de Caficultores del Quindío - Compra de Café Armenia'); dentro del polígono OSM de Armenia,False
+ac_04,Cooperativa de Caficultores - compra de café Filandia,Filandia,acopio,4.6755839,-75.6576487,,,Google Maps ('Cooperativa de Caficultores del Quindío - Compra de Café Filandia'); dentro del polígono OSM de Filandia,False
+ac_05,Procesadora de Café del Quindío,Armenia,acopio,4.5213402,-75.6916539,,,Google Maps ('Procesadora de Café del Quindío'); dentro del polígono OSM de Armenia,False
