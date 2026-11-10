@@ -1,0 +1,9 @@
+id,nombre,municipio,categoria,lat,lon,duracion_visita_min,fuente_duracion,fuente_coord,verificado
+at_01,Parque Nacional del Café,Montenegro,atractivo,4.5402799,-75.7706481,,,Google Maps ('Parque del Café', mismo parque); dentro del polígono OSM de Montenegro,False
+at_02,PANACA (Panaca),Quimbaya,atractivo,4.607683,-75.8186979,,,Google Maps (búsqueda 'PANACA Quindío'); dentro del polígono OSM de Quimbaya,False
+at_03,Valle de Cocora,Salento,atractivo,4.637712,-75.48907,,,Google Maps (búsqueda 'Valle de Cocora Salento'); dentro del polígono OSM de Salento,False
+at_04,Jardín Botánico del Quindío,Calarcá,atractivo,4.5116806,-75.6509772,,,Google Maps (búsqueda 'Jardín Botánico del Quindío'); dentro del polígono OSM de Calarcá,False
+at_05,Museo del Oro Quimbaya,Armenia,atractivo,4.5713808,-75.6478397,,,Google Maps (búsqueda 'Museo del Oro Quimbaya'); dentro del polígono OSM de Armenia,False
+at_06,Parque de los Arrieros,Quimbaya,atractivo,4.5800499,-75.780889,,,Google Maps ('Parque Los ARRIEROS'); dentro del polígono OSM de Quimbaya,False
+at_07,Café La Ruana,Montenegro,atractivo,4.5664441,-75.7521238,,,Google Maps ('LA RUANA CAFE MONTENEGRO'); dentro del polígono OSM de Montenegro,False
+at_08,Las Bailarinas (hotel campestre),Montenegro,finca,4.5512241,-75.7292397,,,Google Maps ('Las bailarinas hotel campestre'); dentro del polígono OSM de Montenegro. Hotel rural: cuenta para el mínimo de fincas/hoteles,False
