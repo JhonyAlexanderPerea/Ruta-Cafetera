@@ -1,0 +1,11 @@
+orden,lugar,desplazamiento_min,visita_min,acumulado_h
+1,Parque de los Arrieros,24.0,180.0,3.4
+2,Mirador de Filandia,39.4,30.0,4.56
+3,Mirador en las manos de Dios,37.6,30.0,5.68
+4,Café Caficultor,23.7,60.0,7.08
+5,Café La Ruana (Circasia),0.5,60.0,8.09
+6,Parque Ecológico El Bosque,22.7,90.0,9.96
+Regreso,Regreso → Plaza de Bolívar,12.9,0,10.18
+Total visitas,,,450.0,
+Total desplazamientos,,160.8,,
+Duración total,,,,10.18
