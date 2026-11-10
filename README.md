@@ -13,6 +13,17 @@ En Windows (sin `make`), usar los mismos comandos con `uv`:
     uv run ruff check .
     uv run streamlit run app/streamlit_app.py
 
+## Datos crudos (no vienen en git)
+Los GraphML (red vial de OpenStreetMap) no están en el repositorio: pesan unos 38 MB. Están como archivos adjuntos del release `data-v1`. Para obtenerlos:
+
+```bash
+gh release download data-v1 --dir data/raw
+```
+
+Sin `gh`, descarga los `.graphml` desde la página del release: https://github.com/JhonyAlexanderPerea/Ruta-Cafetera/releases/tag/data-v1
+
+Luego verifica cada archivo contra su `.meta.json` (nodos, aristas y SHA-256). Los `.meta.json` sí vienen en el clone.
+
 ## Reproducir resultados
 (se completa por fase: make data, make r1, ...)
 
