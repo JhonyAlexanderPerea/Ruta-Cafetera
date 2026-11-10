@@ -1,8 +1,9 @@
 """Medición de algoritmos según el protocolo de la sección 6 del enunciado (D1: Windows, spawn).
 
 - Cada ejecución corre en un proceso hijo creado con `spawn` (no existe `fork` en Windows).
-- El hijo cronometra solo la llamada a `fn` con `perf_counter_ns`. Los datos deben estar cargados
-  antes: `fn` es una función sin argumentos, o con argumentos ya enlazados mediante `functools.partial`.
+- El hijo cronometra solo la llamada a `fn` con `perf_counter_ns`. Los datos deben estar
+  cargados antes: `fn` es una función sin argumentos, o con argumentos ya enlazados
+  mediante `functools.partial`.
   Los argumentos se transfieren al hijo serializados, pero esa transferencia queda fuera del cronómetro.
 - Recolector de basura desactivado durante la medición (se reactiva al terminar).
 - Límite de tiempo por ejecución: si pasa, se mata el hijo y la medición queda `completed=False`.
