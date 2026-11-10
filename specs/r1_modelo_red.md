@@ -71,9 +71,10 @@ Esta fase no es un requerimiento de medición de rendimiento. La medición de `l
 
 - **Lugares a más de 500 m de su nodo:** `at_03` (Valle de Cocora) y `at_11` (El Paraíso del Bambú y La Guadua). La distancia máxima es 1.063 m.
 
-## Decisiones abiertas (PARADA 2)
-- **Lugares a más de 500 m:** las opciones son reubicar, reemplazar o conservar y documentar. La propuesta es **conservar y documentar**: los dos están en zona rural, y el nodo más cercano de la componente sí es el acceso real por vía.
-- **Velocidades (D8):** aprobadas con el ajuste de troncales urbanas a 50 km/h. El supuesto de rutas nacionales sin dato queda para revisión.
+## Decisiones de PARADA 2 (aprobadas)
+- **Lugares a más de 500 m:** se conservan y se documentan (D9): `at_03` y `at_11`.
+- **Velocidad en troncales de ruta nacional sin dato:** 50 km/h, como supuesto documentado (D10).
+- **Velocidades (D8):** aprobadas con el ajuste de troncales urbanas a 50 km/h.
 
 ## Criterio de terminado
 - [ ] Pesos calculados con la regla D8 y tests en verde.

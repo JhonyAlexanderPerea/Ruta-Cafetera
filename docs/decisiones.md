@@ -65,3 +65,16 @@ Registro de decisiones relevantes: qué se decidió, alternativas y por qué. Ca
   - Las velocidades son una **estimación del modelo**, no tiempos reales de recorrido.
   - La mediana de las troncales (30 km/h) sale de pocos datos y etiquetas de OSM, y parece baja para una troncal. Se debe mencionar.
   - La regla de 50 km/h para vías urbanas que aparece en resúmenes de búsqueda no está en la Ley 1239; no se usa hasta confirmar la norma posterior.
+
+## D9. Lugares a más de 500 m de su nodo (PARADA 2)
+
+- **Decidido por:** el grupo, en PARADA 2. Se acepta la propuesta.
+- **Qué:** se conservan y se documentan. Son `at_03` (Valle de Cocora) y `at_11` (El Paraíso del Bambú y La Guadua), con distancias de hasta 1.063 m.
+- **Por qué:** ambos están en zona rural. El nodo más cercano de la componente es el acceso real por vía. Reubicarlos o reemplazarlos cambiaría el catálogo sin una razón de datos.
+- **En el informe:** se marca `a_mas_de_500m = True` en `places.csv` y se explica que la distancia al nodo es mayor que el umbral por la ubicación rural.
+
+## D10. Supuesto de velocidad en rutas nacionales sin dato (PARADA 2)
+
+- **Decidido por:** el grupo, en PARADA 2. Se acepta el supuesto.
+- **Qué:** troncales de ruta nacional (ref 40 o 29) sin `maxspeed` usan 50 km/h, igual que la primaria.
+- **Se documenta como supuesto**, no como dato. La mediana de las rutas nacionales con velocidad explícita (30 km/h) mezcla tramos urbanos y no sirve como referencia.
