@@ -1,13 +1,13 @@
 id,nombre,municipio,categoria,lat,lon,duracion_visita_min,fuente_duracion,fuente_coord,verificado
 cab_01,Plaza de Bolívar,Armenia,cabecera,4.5325725,-75.6730412,,,OSM relación 3871094 (Plaza de Bolívar; Armenia). Plaza de Bolívar; centroide de OSM,False
-cab_02,Buenavista (cabecera),Buenavista,cabecera,4.3526315,-75.7487779,,,Google Maps (pin de búsqueda 'Buenavista Quindío'); dentro del polígono OSM del municipio,False
-cab_03,Calarcá (cabecera),Calarcá,cabecera,4.5266936,-75.6409574,,,Google Maps (pin de búsqueda 'Calarcá Quindío'); dentro del polígono OSM del municipio,False
-cab_04,Circasia (cabecera),Circasia,cabecera,4.616094,-75.635595,,,Google Maps (pin de búsqueda 'Circasia Quindío'); dentro del polígono OSM del municipio,False
-cab_05,Córdoba (cabecera),Córdoba,cabecera,4.392095,-75.687434,,,Google Maps (pin de búsqueda 'Córdoba Quindío'); dentro del polígono OSM del municipio,False
-cab_06,Filandia (cabecera),Filandia,cabecera,4.6746953,-75.6577028,,,Google Maps (pin de búsqueda 'Filandia Quindío'); dentro del polígono OSM del municipio,False
-cab_07,Génova (alcaldía),Génova,cabecera,4.2066969,-75.7911047,,,Google Maps (Alcaldía Municipal de Génova); dentro del polígono OSM. El pin 'Genova' de Google (4.2497;-75.6695) cae en Pijao y se descartó,False
-cab_08,La Tebaida (cabecera),La Tebaida,cabecera,4.453588,-75.79153,,,Google Maps (pin de búsqueda 'La Tebaida Quindío'); dentro del polígono OSM del municipio,False
-cab_09,Montenegro (cabecera),Montenegro,cabecera,4.566637,-75.75012,,,Google Maps (pin de búsqueda 'Montenegro Quindío'); dentro del polígono OSM del municipio,False
-cab_10,Pijao (cabecera),Pijao,cabecera,4.3343461,-75.7036308,,,Google Maps (pin de búsqueda 'Pijao Quindío'); dentro del polígono OSM del municipio,False
-cab_11,Quimbaya (cabecera),Quimbaya,cabecera,4.625907,-75.761865,,,Google Maps (pin de búsqueda 'Quimbaya Quindío'); dentro del polígono OSM del municipio,False
-cab_12,Salento (cabecera),Salento,cabecera,4.637365,-75.5703107,,,Google Maps (pin de búsqueda 'Salento Quindío'); dentro del polígono OSM del municipio,False
+cab_02,Buenavista (cabecera),Buenavista,cabecera,4.359481,-75.7384206,,,"Google Maps: Parque Principal Buenavista; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_03,Calarcá (cabecera),Calarcá,cabecera,4.5305485,-75.6405365,,,"Google Maps: Plaza Mayor de Calarcá; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_04,Circasia (cabecera),Circasia,cabecera,4.6201245,-75.6346655,,,"Google Maps: Parque Principal; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_05,Córdoba (cabecera),Córdoba,cabecera,4.3901136,-75.6854897,,,"Google Maps: Parque Principal De Córdoba; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_06,Filandia (cabecera),Filandia,cabecera,4.6747808,-75.6581641,,,"Google Maps: Parque Principal de Filandia; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_07,Génova (alcaldía),Génova,cabecera,4.2065017,-75.7906184,,,"OSM: Plaza de Bolívar de Génova; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_08,La Tebaida (cabecera),La Tebaida,cabecera,4.4519718,-75.7869536,,,"Google Maps: Parque Luis Arango Cardona (Plaza Nueva); dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_09,Montenegro (cabecera),Montenegro,cabecera,4.5671697,-75.7504826,,,"Google Maps: Parque Principal Montenegro - Plaza de Bolívar; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_10,Pijao (cabecera),Pijao,cabecera,4.3341233,-75.7038431,,,"OSM: Parque Principal de Pijao; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_11,Quimbaya (cabecera),Quimbaya,cabecera,4.6224862,-75.7630803,,,"Google Maps: Plaza de Bolívar Quimbaya; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
+cab_12,Salento (cabecera),Salento,cabecera,4.6372361,-75.5698171,,,"OSM: Plaza de Bolívar de Salento; dentro del polígono OSM del municipio (parque principal, PARADA 1 pendiente)",False
