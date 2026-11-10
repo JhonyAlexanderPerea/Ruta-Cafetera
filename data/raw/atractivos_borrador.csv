@@ -6,4 +6,10 @@ at_04,Jardín Botánico del Quindío,Calarcá,atractivo,4.5116806,-75.6509772,,,
 at_05,Museo del Oro Quimbaya,Armenia,atractivo,4.5713808,-75.6478397,,,Google Maps (búsqueda 'Museo del Oro Quimbaya'); dentro del polígono OSM de Armenia,False
 at_06,Parque de los Arrieros,Quimbaya,atractivo,4.5800499,-75.780889,,,Google Maps ('Parque Los ARRIEROS'); dentro del polígono OSM de Quimbaya,False
 at_07,Café La Ruana,Montenegro,atractivo,4.5664441,-75.7521238,,,Google Maps ('LA RUANA CAFE MONTENEGRO'); dentro del polígono OSM de Montenegro,False
-at_08,Las Bailarinas (hotel campestre),Montenegro,finca,4.5512241,-75.7292397,,,Google Maps ('Las bailarinas hotel campestre'); dentro del polígono OSM de Montenegro. Hotel rural: cuenta para el mínimo de fincas/hoteles,False
+at_08,Las Bailarinas (centro acuático),Montenegro,atractivo,4.5512241,-75.7292397,,,Google Maps ('Las bailarinas hotel campestre'); dentro del polígono OSM de Montenegro,False
+at_09,Café Caficultor,Circasia,atractivo,4.6201211,-75.6348759,,,Google Maps ('Caficultor'); dentro del polígono OSM de Circasia,False
+at_10,Alto de la Cruz,Circasia,atractivo,4.6197285,-75.6325683,,,Google Maps ('Alto De La Cruz'); dentro del polígono OSM de Circasia,False
+at_11,El Paraíso del Bambú y La Guadua,Montenegro,atractivo,4.5208872,-75.8007705,,,Google Maps ('El Paraíso del Bambú y La Guadua'); dentro del polígono OSM de Montenegro,False
+at_12,Parque de La Vida,Armenia,atractivo,4.548106,-75.6604214,,,Google Maps ('Parque De La Vida'); dentro del polígono OSM de Armenia,False
+at_13,Parque Ecológico El Bosque,Calarcá,atractivo,4.5066548,-75.6581325,,,Google Maps ('Parque Ecológico El Bosque'); dentro del polígono OSM de Calarcá,False
+fi_01,Hotel Mocawa Resort,La Tebaida,finca,4.446735,-75.812395,,,Google Maps ('Hotel Mocawa Resort'); dentro del polígono OSM de La Tebaida. Hotel rural: cuenta para el mínimo de fincas/hoteles,False
