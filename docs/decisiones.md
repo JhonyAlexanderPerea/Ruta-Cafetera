@@ -78,3 +78,12 @@ Registro de decisiones relevantes: qué se decidió, alternativas y por qué. Ca
 - **Decidido por:** el grupo, en PARADA 2. Se acepta el supuesto.
 - **Qué:** troncales de ruta nacional (ref 40 o 29) sin `maxspeed` usan 50 km/h, igual que la primaria.
 - **Se documenta como supuesto**, no como dato. La mediana de las rutas nacionales con velocidad explícita (30 km/h) mezcla tramos urbanos y no sirve como referencia.
+
+## D11. Verificación de la tabla de vecinos de Génova (D4)
+
+- **Decidido por:** el grupo, tras la investigación del 2026-11-10.
+- **Resultado:** la tabla de vecinos de OSM se mantiene. Génova comparte frontera solo con Pijao dentro del Quindío.
+- **Fuente:** artículo "Génova (Quindío)" de Wikipedia en español, sección de límites: "colinda por el norte con el municipio de Pijao, por el suroriente con el departamento del Tolima y por el suroccidente con el departamento del Valle del Cauca". Es una fuente secundaria.
+- **Verificación cruzada:** la tabla de OSM coincide con esta descripción. Buenavista (unos 4 km) y Córdoba (unos 10 km) no comparten frontera con Génova.
+- **Pendiente opcional:** buscar la cartografía oficial del DANE o del IGAC para citar una fuente primaria. Si aparece una frontera distinta, se revisa esta decisión.
+- **Nota:** Tolima y Valle del Cauca quedan fuera del criterio, porque los pares solo usan municipios del Quindío.
