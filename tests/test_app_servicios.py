@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 import itertools
 import random
 from pathlib import Path
@@ -165,3 +166,32 @@ def test_datos_reales_matriz_y_lugares():
     ids, m = svc.cargar_matriz(matriz)
     assert len(ids) == 40 and len(m) == 40 and all(len(f) == 40 for f in m)
     assert ids == [p["id"] for p in svc.cargar_lugares(places)]
+
+
+def _pares_dijkstra_reales():
+    tabla = RAIZ / "results/r2_dijkstra.csv"
+    if not tabla.exists():
+        return []
+    with open(tabla, newline="", encoding="utf-8") as f:
+        return [
+            (r["origen"], r["destino"], float(r["tiempo_viaje_s"]))
+            for r in csv.DictReader(f)
+            if r["version"] == "cola_prioridad" and r["estado"] == "completada"
+        ]
+
+
+@pytest.mark.skipif(
+    not (RAIZ / "data/processed/graph_csr.npz").exists()
+    or not (RAIZ / "results/r2_dijkstra.csv").exists(),
+    reason="faltan graph_csr.npz o r2_dijkstra.csv (pipeline de R1 y R2)",
+)
+@pytest.mark.parametrize("origen,destino,esperado_s", _pares_dijkstra_reales())
+def test_ruta_optima_coincide_con_r2_dijkstra(origen, destino, esperado_s):
+    proc = RAIZ / "data/processed"
+    g = svc.cargar_grafo(proc / "graph_csr.npz")
+    nodos = svc.cargar_nodos(proc / "nodes.csv")
+    lugares = {p["id"]: p for p in svc.cargar_lugares(proc / "places.csv")}
+    r = svc.ruta_optima(g, nodos, lugares[origen]["nodo_idx"], lugares[destino]["nodo_idx"])
+    assert "error" not in r
+    # La tabla redondea a 2 decimales en segundos.
+    assert r["tiempo_min"] * 60 == pytest.approx(esperado_s, abs=0.01)
