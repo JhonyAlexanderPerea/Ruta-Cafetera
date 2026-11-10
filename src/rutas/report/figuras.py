@@ -96,7 +96,8 @@ def figura_r4_heuristica(rows: list[dict], salida: Path) -> None:
 def main() -> None:
     res, fig = config.RESULTS, config.FIGURES
     fig.mkdir(parents=True, exist_ok=True)
-    figura_r1(completadas(leer(res / "r1_tiempos_componente.csv")), fig / "r1_tiempo_componente.png")
+    r1 = completadas(leer(res / "r1_tiempos_componente.csv"))
+    figura_r1(r1, fig / "r1_tiempo_componente.png")
     figura_r2(leer(res / "r2_dijkstra.csv"), fig / "r2_nodos_vs_tiempo.png")
     figura_r3(leer(res / "r3_envolvente.csv"), fig / "r3_envolvente_tiempos.png")
     figura_r4_exactas(leer(res / "r4_exactas.csv"), fig / "r4_exactas_tiempo.png")
