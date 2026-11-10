@@ -228,3 +228,8 @@ __marimo__/
 data/raw/cache/
 data/raw/*.graphml
 !data/raw/*.meta.json
+# Datos procesados (grafo CSR): se publican como Release, no en git
+data/processed/*.npz
+
+# Configuracion local de agentes
+.atl/
