@@ -39,6 +39,16 @@ Nota: `make validar-catalogo`, que aparece en la spec F1, **no existe** en el `M
 8. **`src/rutas/data/` sin `__init__.py`:** funciona como namespace package y los tests pasan, pero es inconsistente con el resto de paquetes.
 9. **`make` ausente en Windows:** el flujo del roadmap depende de `make`. Opciones: instalarlo (p. ej. `scoop install make`) o usar los comandos de `uv` directamente.
 
+### Estado tras las correcciones (rama `fix/auditoria-discrepancias`)
+
+- Punto 4 (timeouts): **resuelto**. Timeout por red en `descarga.py` (D2 en `docs/decisiones.md`).
+- Punto 7 (`dist_type`): **resuelto**. Explícito en `descarga.py` (D3).
+- Punto 8 (`data/__init__.py`): **resuelto**.
+- Punto 9 (`make` en Windows): **resuelto** con comandos `uv` en el README (D7).
+- Punto 6 (plaza de Bolívar): comprobada contra OSM (≈4 m, D6). Falta la verificación humana (PARADA 1).
+- Riesgo de `fork`: **resuelto** por decisión del grupo: medición en Windows con `spawn` (D1).
+- Pendientes del grupo: criterio de "cercanos" (D4) y algoritmo de envolvente (D5).
+
 ## 4. Riesgos
 
 - **Medición en Windows (bloqueante para Fase 3):** el roadmap prescribe `multiprocessing` con `fork`, que no existe en Windows. Si la máquina oficial no es Linux/macOS, `measure()` no funciona tal como está especificado. Hay que decidir antes de implementar: máquina Linux/macOS para las mediciones oficiales, o un fallback con `spawn` documentado.
