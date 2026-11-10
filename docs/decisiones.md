@@ -50,11 +50,14 @@ Registro de decisiones relevantes: qué se decidió, alternativas y por qué. Ca
 
 ## D8. Velocidad de cada tramo y tiempo de viaje (R1.2)
 
-- **Estado:** propuesta, pendiente de confirmación del grupo en PARADA 2.
+- **Estado:** velocidades aprobadas en PARADA 2 con el ajuste de troncales urbanas (50 km/h). El supuesto de rutas nacionales queda marcado para revisión.
 - **Qué:** `time_s = dist_m / velocidad`, con la velocidad de cada arista obtenida así:
   1. **Velocidad explícita de OSM** (`maxspeed`) cuando la arista la tiene. Hay 1.307 de 20.153 aristas en el departamento (6,5 %).
   2. **Vías residenciales** sin velocidad explícita: **30 km/h**. Es el máximo que fija la ley para zonas residenciales.
-  3. **Otros tipos de vía sin velocidad explícita:** mediana de las velocidades explícitas de su tipo de vía en el departamento: no clasificada, terciaria y secundaria 30 km/h; primaria 50 km/h; troncal 30 km/h.
+  3. **Otros tipos de vía sin velocidad explícita:** mediana de las velocidades explícitas de su tipo de vía en el departamento: no clasificada, terciaria y secundaria 30 km/h; primaria 50 km/h.
+  3a. **Troncales (`trunk`) sin velocidad explícita:**
+     - **Dentro de ciudad** (nombre de calle urbana, p. ej. Carrera 23 o Carrera 16 en Armenia): **50 km/h**. Decisión del grupo.
+     - **Rutas nacionales** (ref 40 o 29, p. ej. Autopista del Café) sin velocidad explícita: **50 km/h**, igual que la primaria. Es un supuesto a revisar; la mediana de las rutas nacionales con velocidad explícita (30 km/h) mezcla tramos urbanos y no sirve.
   4. **Respaldo:** 30 km/h, si el tipo de vía no tiene datos.
 - **Techos de verificación** (no se aplican como velocidad, sirven para comprobar que el resultado no los supera): 30 km/h en zonas residenciales y escolares; 80 km/h en vías urbanas para servicio público, carga y transporte escolar, y 80 km/h en carreteras nacionales y departamentales para esos mismos vehículos; 120 km/h como máximo general en carreteras nacionales y departamentales.
 - **Fuente de los techos:** Ley 1239 de 2008, que modifica los artículos 106 y 107 del Código Nacional de Tránsito (Ley 769 de 2002). La velocidad real de cada vía la fija la autoridad municipal, el Ministerio de Transporte o la Gobernación, no la ley.
