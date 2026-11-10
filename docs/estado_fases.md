@@ -9,7 +9,7 @@ Actualizado: 2026-11-10. Fase actual: **Fase 4 (R2, caminos mínimos)**.
 | 2. R1 modelo de red | Código y spec hechos; PARADA 2 aprobada | `specs/r1_modelo_red.md`, PR #2 |
 | 3. Medición | En revisión | Spec `specs/f3_medicion.md` pendiente de revisión (PR #5) |
 | 3b. Tiempos R1.3 | Hechos | `results/r1_tiempos_componente.csv`, PR #4 |
-| 4. R2 Dijkstra | **En curso** | Rama `feat/f4-dijkstra` |
+| 4. R2 Dijkstra | **En curso**: algoritmos y tests hechos (54 pasan); faltan experimentos y spec | Rama `feat/f4-dijkstra` |
 | 5. R3 envolvente | Pendiente | PARADA 5 |
 | 6. R4 viajante | Pendiente | PARADA 6 |
 | 7. R5 aplicación | Pendiente | Carpeta `app/` no creada |
