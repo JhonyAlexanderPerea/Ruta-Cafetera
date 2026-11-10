@@ -51,7 +51,7 @@ def verificar_matriz(M: np.ndarray) -> dict:
         sum(1 for i in range(len(M)) for j in range(i + 1, len(M)) if M[i, j] != M[j, i])
     )
     # Violación: d(i,k) > d(i,j) + d(j,k), para todas las ternas (i, j, k)
-    # Tolerancia de 1e-6 s: las sumas en distinto orden difieren en ~1e-12 por redondeo de punto flotante.
+    # Tolerancia de 1e-6 s: sumas en distinto orden difieren ~1e-12 por punto flotante.
     triangular = int((M[:, None, :] > M[:, :, None] + M[None, :, :] + 1e-6).sum())
     return {
         "diagonal_ok": diagonal_ok,
