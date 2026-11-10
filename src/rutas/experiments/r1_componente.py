@@ -2,7 +2,8 @@
 
 Protocolo (enunciado, sección 6): misma máquina, mediana de 5 repeticiones, límite de 5 minutos,
 solo se mide la llamada. La carga del GraphML queda fuera del cronómetro.
-Salidas: results/r1_tiempos_componente.csv, results/r1_tamano_red.csv, results/_meta/r1_componente.json.
+Salidas: results/r1_tiempos_componente.csv, results/r1_tamano_red.csv
+y results/_meta/r1_componente.json.
 """
 
 from __future__ import annotations
