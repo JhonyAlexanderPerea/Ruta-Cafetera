@@ -35,7 +35,7 @@ Dejar en `data/raw/` los datos de entrada del proyecto, sin transformarlos: la r
 - Un lugar cuya ubicación no se pueda confirmar se reemplaza por otro.
 
 **Pares de medición**
-- Se eligen 20 pares con semilla fija 42, entre lugares a una distancia en línea recta ≤ 25 km (criterio de "cercanos", se justifica en el informe).
+- Se eligen 20 pares con semilla fija 42. "Cercanos" = mismo municipio o municipio vecino (tabla de vecinos en `docs/decisiones.md`, D4; sin límite en km). Respaldo si la tabla no se valida: 25 km en línea recta.
 - La orientación de cada par se sortea, porque la red es dirigida.
 - Los primeros 10 pares llevan `usa_lineal=True`. Entre esos 10 debe haber pares del mismo municipio y de municipios vecinos.
 

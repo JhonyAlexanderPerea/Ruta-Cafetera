@@ -24,8 +24,13 @@ Registro de decisiones relevantes: qué se decidió, alternativas y por qué. Ca
 
 ## D4. Criterio de "cercanos" para los pares de Dijkstra
 
-- **Decidido por:** pendiente del grupo.
-- **Propuesta:** mismo municipio o municipios vecinos y distancia en línea recta ≤ 25 km. El enunciado solo pide lo primero; los 25 km son nuestra propuesta.
+- **Decidido por:** el grupo, según el enunciado (R2): "del mismo municipio o de municipios vecinos".
+- **Qué:** un par es "cercano" si sus dos lugares están en el mismo municipio o en municipios vecinos. Sin límite en km.
+- **Vecindad:** calculada con OSMnx (`geocode_to_gdf`) sobre los polígonos de los 12 municipios del Quindío, consulta del 2026-11-10. Dos municipios son vecinos si sus polígonos se tocan o comparten frontera.
+- **Pares de vecinos (22):** Armenia–Calarcá, Armenia–Circasia, Armenia–La Tebaida, Armenia–Montenegro, Armenia–Salento, Buenavista–Calarcá, Buenavista–Córdoba, Buenavista–Pijao, Calarcá–Córdoba, Calarcá–La Tebaida, Calarcá–Pijao, Calarcá–Salento, Circasia–Filandia, Circasia–Montenegro, Circasia–Quimbaya, Circasia–Salento, Córdoba–Pijao, Filandia–Quimbaya, Filandia–Salento, Génova–Pijao, La Tebaida–Montenegro, Montenegro–Quimbaya.
+- **Pendiente de revisar en mapa:** los polígonos de OSM pueden tener errores de frontera. Génova aparece con un solo vecino (Pijao); conviene confirmarlo antes de congelar la tabla.
+- **Respaldo:** si la tabla de vecinos no se puede validar, usar 25 km en línea recta. Esa cifra es nuestra propuesta; el enunciado no la menciona.
+- **Motivo del criterio:** la versión lineal de Dijkstra es O(V²) y en la red completa puede tardar minutos por consulta (enunciado R2). Los pares cercanos mantienen el costo bajo; la distancia en línea recta no controla el costo, porque lo que pesa son los nodos explorados.
 
 ## D5. Algoritmo de envolvente convexa
 
