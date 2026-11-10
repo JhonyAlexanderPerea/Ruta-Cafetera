@@ -96,6 +96,19 @@ Registro de decisiones relevantes: qué se decidió, alternativas y por qué. Ca
 - **Resultado:** brecha promedio entre 8,7 % y 11,4 %, y brecha máxima de 25,4 % en k = 12 (5 instancias por k, `results/r4_heuristica.csv`).
 - **Ejemplo:** en una instancia de 5 lugares, la voraz da 11.803 s y el óptimo de Held-Karp 10.956 s (`results/r4_ejemplo_voraz.csv`). Ese ejemplo muestra que la voraz no garantiza el óptimo, a diferencia de Dijkstra, donde la elección voraz sí es correcta porque los pesos no son negativos.
 
+## D15. Itinerario en vivo sobre la matriz de R2 (R5)
+
+- **Decidido por:** aprobado por el responsable del repo al arrancar la fase 7 (2026-11-10); queda pendiente la revisión del grupo.
+- **Qué:** la app calcula el itinerario con `results/r2_matriz_tiempos.csv` (segundos) y no recalcula con Dijkstra.
+- **Por qué:** es rápido y consistente con R4. Recalcular la matriz en vivo tardaría mucho sin ganancia para la nota.
+- **Alternativa descartada:** recalcular con Dijkstra en la app.
+
+## D16. La app no poda atractivos automáticamente (R5)
+
+- **Decidido por:** aprobado por el responsable del repo al arrancar la fase 7 (2026-11-10); queda pendiente la revisión del grupo.
+- **Qué:** si un itinerario supera 11 h (660 min), la app muestra una advertencia y no quita atractivos. La regla de corte está en R4 (D14).
+- **Por qué:** la app es demostrativa; no debe cambiar el resultado de R4 en silencio.
+
 ## D14. Itinerario de un día (R4, aprobado en PARADA 6)
 
 - **Atractivos:** se toman al azar del catálogo (semilla 42), solo de la categoría atractivo, sin Armenia. Es un criterio provisional; el grupo puede elegirlos a mano.

@@ -1,6 +1,6 @@
 # Spec: R5 · Aplicación demostrativa
 
-**Autor:** Claude (borrador con el grupo) · **Revisor:** <pendiente: nombre distinto del autor> · **Estado:** borrador
+**Autor:** Claude (borrador con el grupo) · **Revisor:** <pendiente: nombre distinto del autor> · **Estado:** implementada (revisión y PARADA 7 pendientes)
 
 ## Objetivo
 Una aplicación Streamlit que muestre los resultados de R1 a R4 y permita dos cálculos en vivo: la ruta origen-destino (Dijkstra con cola de prioridad) y el itinerario de un día (Held-Karp y heurística voraz). Se evalúa que muestre los resultados y que funcione siguiendo el README, no su diseño visual.
@@ -88,15 +88,17 @@ Una aplicación Streamlit que muestre los resultados de R1 a R4 y permita dos c�
 La app no es un experimento: no se mide su tiempo como requisito. Sí se verifica con los tests de arriba. Las tablas de R4 que muestra la app son las ya generadas en `results/`.
 
 ## Decisiones abiertas (para el grupo)
+Aceptadas al arrancar la fase (2026-11-10). Registro: `docs/decisiones.md`, D15 y D16.
 - **Fuente de tiempos en vivo:** la app usa `r2_matriz_tiempos.csv` para el itinerario (rápido, consistente con R4). Alternativa: recalcular con Dijkstra; más lento y sin ganancia para la nota.
 - **Advertencia de 11 h sin poda automática:** la app avisa pero no quita atractivos. Si el grupo quiere poda en la app, hay que decidir el criterio (el de R4 está en D14).
 - **Partida por defecto:** Armenia (`cab_01`, Plaza de Bolívar), según el enunciado.
 
 ## Criterio de terminado
-- [ ] `app_servicios.py` con tests en verde.
-- [ ] Smoke de la app con `AppTest` en verde.
-- [ ] `make app` (o `uv run streamlit run app/streamlit_app.py`) levanta la app.
-- [ ] README con pasos para correrla en local, sin OSMnx.
-- [ ] Las cuatro vistas muestran datos reales de `data/processed/` y `results/`.
-- [ ] `make test` y `make lint` en verde.
+- [x] `app_servicios.py` con tests en verde (casos 1, 2, 4 a 8 y 3 con el grafo real).
+- [x] Smoke de la app con `AppTest` en verde (caso 9).
+- [x] `uv run streamlit run app/streamlit_app.py` levanta la app (probada en navegador: vistas Ruta, Envolvente, Itinerario y Resultados).
+- [x] README con pasos para correrla en local, sin OSMnx.
+- [x] Las cuatro vistas muestran datos reales de `data/processed/` y `results/` (la ruta Plaza de Bolívar a Buenavista da 49,8 min; el itinerario de 6 atractivos calcula Held-Karp y avisa por encima de 11 h).
+- [x] `uv run pytest -q` (169 pasan) y `uv run ruff check .` en verde. En Windows no hay `make`; son los mismos comandos que el Makefile.
 - [ ] PARADA 7: una persona ajena al código levanta la app solo con el README.
+- [ ] Revisión de esta spec por una persona distinta del autor.
