@@ -4,7 +4,8 @@
 - El hijo cronometra solo la llamada a `fn` con `perf_counter_ns`. Los datos deben estar
   cargados antes: `fn` es una función sin argumentos, o con argumentos ya enlazados
   mediante `functools.partial`.
-  Los argumentos se transfieren al hijo serializados, pero esa transferencia queda fuera del cronómetro.
+  Los argumentos se transfieren al hijo serializados; esa transferencia queda fuera del
+  cronómetro.
 - Recolector de basura desactivado durante la medición (se reactiva al terminar).
 - Límite de tiempo por ejecución: si pasa, se mata el hijo y la medición queda `completed=False`.
 - Si la primera ejecución supera `long_run_s`, no se repite (regla de ejecuciones largas).
