@@ -47,3 +47,18 @@ Registro de decisiones relevantes: qué se decidió, alternativas y por qué. Ca
 
 - **Decidido por:** nosotros.
 - **Qué:** los comandos del `Makefile` se documentan como equivalentes de `uv` en el README. El `Makefile` se mantiene para Linux/macOS y CI.
+
+## D8. Velocidad de cada tramo y tiempo de viaje (R1.2)
+
+- **Estado:** propuesta, pendiente de confirmación del grupo en PARADA 2.
+- **Qué:** `time_s = dist_m / velocidad`, con la velocidad de cada arista obtenida así:
+  1. **Velocidad explícita de OSM** (`maxspeed`) cuando la arista la tiene. Hay 1.307 de 20.153 aristas en el departamento (6,5 %).
+  2. **Vías residenciales** sin velocidad explícita: **30 km/h**. Es el máximo que fija la ley para zonas residenciales.
+  3. **Otros tipos de vía sin velocidad explícita:** mediana de las velocidades explícitas de su tipo de vía en el departamento: no clasificada, terciaria y secundaria 30 km/h; primaria 50 km/h; troncal 30 km/h.
+  4. **Respaldo:** 30 km/h, si el tipo de vía no tiene datos.
+- **Techos de verificación** (no se aplican como velocidad, sirven para comprobar que el resultado no los supera): 30 km/h en zonas residenciales y escolares; 80 km/h en vías urbanas para servicio público, carga y transporte escolar, y 80 km/h en carreteras nacionales y departamentales para esos mismos vehículos; 120 km/h como máximo general en carreteras nacionales y departamentales.
+- **Fuente de los techos:** Ley 1239 de 2008, que modifica los artículos 106 y 107 del Código Nacional de Tránsito (Ley 769 de 2002). La velocidad real de cada vía la fija la autoridad municipal, el Ministerio de Transporte o la Gobernación, no la ley.
+- **Limitaciones que hay que escribir en el informe:**
+  - Las velocidades son una **estimación del modelo**, no tiempos reales de recorrido.
+  - La mediana de las troncales (30 km/h) sale de pocos datos y etiquetas de OSM, y parece baja para una troncal. Se debe mencionar.
+  - La regla de 50 km/h para vías urbanas que aparece en resúmenes de búsqueda no está en la Ley 1239; no se usa hasta confirmar la norma posterior.
