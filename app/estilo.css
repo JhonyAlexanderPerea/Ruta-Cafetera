@@ -1,0 +1,188 @@
+/* Tema visual de la app: oscuro, vidrio esmerilado, acento azul y café.
+   Solo presentación. La lógica vive en src/rutas/app_servicios.py. */
+
+:root {
+  --fondo: #000000;
+  --fondo-2: #0b0d12;
+  --vidrio: rgba(28, 28, 30, 0.68);
+  --vidrio-borde: rgba(255, 255, 255, 0.10);
+  --texto: #f5f5f7;
+  --texto-2: #a1a1a6;
+  --acento: #0a84ff;
+  --cafe: #c8a27a;
+  --peligro: #ff453a;
+  --radio: 22px;
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --sombra-hover: 0 18px 44px rgba(0, 0, 0, 0.55);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --fuente: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html, body, .stApp {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+    radial-gradient(900px 500px at 110% 0%, rgba(200, 162, 122, 0.12), transparent 55%),
+    var(--fondo) !important;
+  color: var(--texto);
+  font-family: var(--fuente);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Oculta el menú y el pie de Streamlit para una vista limpia. */
+#MainMenu, footer { visibility: hidden; }
+header[data-testid="stHeader"] { background: transparent; }
+
+.block-container {
+  max-width: 1180px;
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+/* ---------- Encabezado ---------- */
+.cabecera { margin: 0 0 1.75rem 0; animation: subir 0.7s var(--ease) both; }
+.cabecera .marca {
+  font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--cafe); font-weight: 600; margin: 0 0 0.35rem 0;
+}
+.cabecera h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; letter-spacing: -0.03em;
+  margin: 0; line-height: 1.05; color: var(--texto);
+}
+.cabecera p { color: var(--texto-2); margin: 0.5rem 0 0 0; font-size: 1.05rem; }
+
+/* ---------- Selector de vistas (segmentado) ---------- */
+div[role="radiogroup"] {
+  display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07); border: 1px solid var(--vidrio-borde);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"] {
+  border-radius: 999px; padding: 0.45rem 1.05rem; cursor: pointer;
+  transition: background 0.35s var(--ease), box-shadow 0.35s var(--ease), transform 0.2s var(--ease);
+  margin: 0 !important;
+}
+/* Oculta el círculo del radio: solo se ve el texto de cada pestaña. */
+div[role="radiogroup"] label[data-testid="stRadioOption"] > div > div:first-child {
+  display: none !important;
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"] p {
+  color: var(--texto-2); font-weight: 500; font-size: 0.95rem; margin: 0;
+  transition: color 0.3s var(--ease);
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"]:hover p { color: var(--texto); }
+div[role="radiogroup"] label[data-testid="stRadioOption"]:active { transform: scale(0.97); }
+div[role="radiogroup"] label[data-testid="stRadioOption"][data-selected="true"] {
+  background: var(--texto); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"][data-selected="true"] p {
+  color: #000; font-weight: 600;
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"]:focus-within {
+  outline: 2px solid var(--acento); outline-offset: 2px;
+}
+
+/* ---------- Tarjetas (contenedores con borde) ---------- */
+[data-testid="stVerticalBlockBorderWrapper"] > div > div > [data-testid="stVerticalBlock"] {
+  gap: 0.9rem;
+}
+div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div) {
+  border-radius: var(--radio) !important;
+}
+[data-testid="stVerticalBlockBorderWrapper"] {
+  background: var(--vidrio);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid var(--vidrio-borde) !important;
+  border-radius: var(--radio) !important;
+  box-shadow: var(--sombra);
+  padding: 1.25rem 1.35rem;
+  transition: box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+  animation: subir 0.7s var(--ease) both;
+}
+[data-testid="stVerticalBlockBorderWrapper"]:hover {
+  box-shadow: var(--sombra-hover);
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+[data-testid="stVerticalBlockBorderWrapper"]:nth-of-type(2) { animation-delay: 0.08s; }
+[data-testid="stVerticalBlockBorderWrapper"]:nth-of-type(3) { animation-delay: 0.16s; }
+[data-testid="stVerticalBlockBorderWrapper"]:nth-of-type(4) { animation-delay: 0.24s; }
+
+/* ---------- Títulos dentro de tarjetas ---------- */
+h2, h3, [data-testid="stHeading"] h2, [data-testid="stHeading"] h3 {
+  color: var(--texto) !important; letter-spacing: -0.02em; font-weight: 650;
+}
+h3 { font-size: 1.35rem !important; }
+
+/* ---------- Métricas tipo tarjeta del clima ---------- */
+[data-testid="stMetric"] {
+  background: rgba(255, 255, 255, 0.04); border: 1px solid var(--vidrio-borde);
+  border-radius: 16px; padding: 0.85rem 1rem;
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+[data-testid="stMetric"]:hover { background: rgba(255, 255, 255, 0.07); }
+[data-testid="stMetricLabel"] p {
+  color: var(--texto-2) !important; font-size: 0.82rem !important; font-weight: 500;
+}
+[data-testid="stMetricValue"] {
+  color: var(--texto) !important; font-weight: 700; letter-spacing: -0.02em;
+}
+
+/* ---------- Campos ---------- */
+[data-baseweb="select"] > div, [data-baseweb="input"] > div {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid var(--vidrio-borde) !important;
+  border-radius: 14px !important;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+[data-baseweb="select"] > div:hover { border-color: rgba(255, 255, 255, 0.25) !important; }
+[data-baseweb="select"] > div:focus-within {
+  border-color: var(--acento) !important;
+  box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.25);
+}
+label[data-testid="stWidgetLabel"] p {
+  color: var(--texto-2) !important; font-size: 0.85rem !important; font-weight: 500;
+}
+
+/* ---------- Mensajes ---------- */
+[data-testid="stAlert"] { border-radius: 16px !important; border: 1px solid var(--vidrio-borde); }
+
+/* ---------- Mapas, tablas e imágenes ---------- */
+iframe { border-radius: 18px; border: 1px solid var(--vidrio-borde); }
+[data-testid="stDataFrame"] { border-radius: 16px; overflow: hidden; }
+[data-testid="stImage"] img {
+  border-radius: 16px; transition: transform 0.5s var(--ease);
+}
+[data-testid="stImage"]:hover img { transform: scale(1.01); }
+[data-testid="stCaptionContainer"] p { color: var(--texto-2) !important; }
+
+/* ---------- Pastilla de diferencia ---------- */
+.pastilla {
+  display: inline-block; padding: 0.35rem 0.8rem; border-radius: 999px;
+  background: rgba(200, 162, 122, 0.16); color: var(--cafe);
+  font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(200, 162, 122, 0.3);
+}
+.ruta-orden { color: var(--texto-2); font-size: 0.98rem; line-height: 1.6; margin: 0.25rem 0 0.75rem; }
+
+/* ---------- Animaciones ---------- */
+@keyframes subir {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 640px) {
+  .block-container { padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; }
+  div[role="radiogroup"] { display: flex; width: 100%; }
+  div[role="radiogroup"] > label { flex: 1 1 auto; text-align: center; padding: 0.45rem 0.6rem; }
+  [data-testid="stVerticalBlockBorderWrapper"] { padding: 1rem; }
+}
