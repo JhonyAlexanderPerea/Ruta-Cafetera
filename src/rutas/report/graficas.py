@@ -94,7 +94,7 @@ def grafica_r2(df: pd.DataFrame) -> alt.TopLevelMixin:
         .mark_circle(size=120, opacity=0.8)
         .encode(
             x=alt.X("nodos_explorados:Q", title="Nodos explorados (unidades)"),
-            y=alt.Y("tiempo_ms:Q", scale=alt.Scale(type="symlog"), title="Tiempo (ms)"),
+            y=alt.Y("tiempo_ms:Q", scale=alt.Scale(type="log"), title="Tiempo (ms)"),
             color=color,
             tooltip=[
                 alt.Tooltip("origen:N", title="Origen"),
