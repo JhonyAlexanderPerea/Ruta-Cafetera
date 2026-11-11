@@ -114,6 +114,24 @@ def nodos_explorados(
     return [nodos_latlon[v] for v in fijados]
 
 
+def tramos_polilinea(
+    g: CSRGraph,
+    nodos_latlon: dict[int, tuple[float, float]],
+    nodos_parada: list[int],
+) -> list[list[tuple[float, float]]]:
+    """Camino real (Dijkstra) entre cada par de paradas consecutivas.
+
+    Si un tramo no es alcanzable se devuelve la línea recta, para no romper el mapa."""
+    tramos = []
+    for a, b in itertools.pairwise(nodos_parada):
+        res = dijkstra(g, a, b)
+        if res.path is None:
+            tramos.append([nodos_latlon[a], nodos_latlon[b]])
+        else:
+            tramos.append([nodos_latlon[n] for n in res.path])
+    return tramos
+
+
 def metricas_envolvente(vertices: list[dict]) -> dict:
     """Área (fórmula del zapatero), perímetro y vértices de un polígono en metros UTM."""
     xy = [(float(v["x_utm"]), float(v["y_utm"])) for v in vertices]

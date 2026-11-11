@@ -226,3 +226,46 @@ def _punto() -> folium.DivIcon:
         icon_size=(14, 14),
         icon_anchor=(7, 7),
     )
+
+
+def _pin_numero(numero: int | None, color: str, icono: str = "casa") -> folium.DivIcon:
+    """Pin con el número de parada, o con un icono para la partida."""
+    contenido = str(numero) if numero is not None else svg(icono, 20)
+    return folium.DivIcon(
+        html=f'<div class="pin grande" style="--c:{color};font-weight:700">{contenido}</div>',
+        icon_size=(42, 42),
+        icon_anchor=(21, 21),
+    )
+
+
+def mapa_itinerario(
+    tramos: list[list[tuple[float, float]]], paradas: list[dict], minutos: list[float]
+) -> folium.Map:
+    """Recorrido en orden: tramos por carretera coloreados y paradas numeradas.
+
+    `paradas` va en orden de visita (la primera es la partida); `tramos` y `minutos`
+    traen un elemento por cada par consecutivo, incluido el regreso."""
+    todos = [pt for tramo in tramos for pt in tramo]
+    m = mapa_base(todos[0], 10)
+    n = len(tramos)
+    for k, (tramo, mins) in enumerate(zip(tramos, minutos, strict=True), start=1):
+        color = f"hsl({140 - 100 * (k - 1) / max(n - 1, 1):.0f},85%,58%)"
+        folium.PolyLine(tramo, color=color, weight=13, opacity=0.16).add_to(m)
+        folium.PolyLine(
+            tramo,
+            color=color,
+            weight=5,
+            opacity=0.95,
+            class_name="ruta-viva",
+            tooltip=_tooltip(f"Tramo {k}", f"{mins:.0f} min en carro"),
+        ).add_to(m)
+    for k, x in enumerate(paradas):
+        inicio = k == 0
+        folium.Marker(
+            (x["lat"], x["lon"]),
+            icon=_pin_numero(None if inicio else k, "#30d158" if inicio else NARANJA),
+            tooltip=_tooltip(x["nombre"], "Partida y regreso" if inicio else f"Parada {k}"),
+            z_index_offset=1000 - k,
+        ).add_to(m)
+    m.fit_bounds(todos, padding=(30, 30))
+    return m

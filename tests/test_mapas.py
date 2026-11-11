@@ -43,3 +43,14 @@ def test_iconos():
     assert "<svg" in svg("reloj") and "currentColor" in svg("reloj")
     assert set(CATEGORIAS) == {"cabecera", "atractivo", "finca", "acopio"}
     assert estilo_categoria("otra")[2] == "pin"
+
+
+def test_mapa_itinerario_numera_paradas_y_dibuja_tramos():
+    paradas = [
+        {"nombre": "Casa", "municipio": "Armenia", "lat": 4.5, "lon": -75.6},
+        {"nombre": "A <i>", "municipio": "Salento", "lat": 4.6, "lon": -75.65},
+    ]
+    legs = [[(4.5, -75.6), (4.6, -75.65)], [(4.6, -75.65), (4.5, -75.6)]]
+    out = _html(mapas.mapa_itinerario(legs, paradas, [30.0, 25.0]))
+    assert "Tramo 1" in out and "Tramo 2" in out and "ruta-viva" in out
+    assert "A <i>" not in out and "A &lt;i&gt;" in out

@@ -273,3 +273,15 @@ def test_ruta_optima_informa_nodos_explorados():
 def test_distancia_recta_un_grado_de_latitud():
     assert svc.distancia_recta_km((4.0, -75.0), (5.0, -75.0)) == pytest.approx(111.19, abs=0.1)
     assert svc.distancia_recta_km((4.5, -75.6), (4.5, -75.6)) == 0.0
+
+
+def test_tramos_polilinea_une_paradas_consecutivas():
+    # 0->1->2 existe; 2 no sale a ningún lado, así que el tramo 2->0 queda vacío.
+    legs = svc.tramos_polilinea(_grafo_pequeno(), NODOS, [0, 1, 2])
+    assert legs[0] == [NODOS[0], NODOS[1]]
+    assert legs[1] == [NODOS[1], NODOS[2]]
+
+
+def test_tramos_polilinea_inalcanzable_devuelve_tramo_recto():
+    legs = svc.tramos_polilinea(_grafo_pequeno(), NODOS, [2, 0])
+    assert legs == [[NODOS[2], NODOS[0]]]
