@@ -1,6 +1,6 @@
 # Spec: R1 · Modelo de la red vial
 
-**Autor:** Claude (borrador para el grupo) · **Revisor:** <pendiente> · **Estado:** borrador (decisiones D4, D8 y tratamiento de lugares >500 m pendientes de PARADA 2)
+**Autor:** Claude (borrador para el grupo) · **Revisor:** JhonyAlexanderPerea (asignado, pendiente de revisión) · **Estado:** implementada; decisiones de PARADA 2 aprobadas (D8, D9, D10); falta la firma del revisor
 
 ## Objetivo
 Convertir la red vial del Quindío (OSMnx) en un grafo dirigido con tiempo de viaje por arista, quedarse con su componente fuertemente conexa y guardar el grafo en formato CSR, junto con los nodos y la asociación de cada lugar del catálogo.
@@ -82,4 +82,4 @@ Esta fase no es un requerimiento de medición de rendimiento. La medición de `l
 - [ ] `places.csv` con todos los lugares del catálogo validado (PARADA 1).
 - [ ] Tabla de tamaños antes y después en el README.
 - [ ] Tiempos de `largest_component` medidos en Fase 3 con el protocolo.
-- [ ] Decisiones de lugares >500 m y de velocidades confirmadas por el grupo (PARADA 2).
+- [x] Decisiones de lugares >500 m y de velocidades confirmadas por el grupo (PARADA 2): D8, D9 y D10.
