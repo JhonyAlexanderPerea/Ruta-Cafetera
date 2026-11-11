@@ -234,8 +234,12 @@ def test_nodos_explorados_sin_ruta_devuelve_vacio():
 
 
 def test_metricas_envolvente_cuadrado():
-    v = [{"x_utm": 0, "y_utm": 0}, {"x_utm": 2000, "y_utm": 0},
-         {"x_utm": 2000, "y_utm": 3000}, {"x_utm": 0, "y_utm": 3000}]
+    v = [
+        {"x_utm": 0, "y_utm": 0},
+        {"x_utm": 2000, "y_utm": 0},
+        {"x_utm": 2000, "y_utm": 3000},
+        {"x_utm": 0, "y_utm": 3000},
+    ]
     m = svc.metricas_envolvente(v)
     assert m["area_km2"] == pytest.approx(6.0)
     assert m["perimetro_km"] == pytest.approx(10.0)

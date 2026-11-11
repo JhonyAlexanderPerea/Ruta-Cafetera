@@ -9,6 +9,7 @@ dependencies = [
   "pandas",
   "numpy",
   "matplotlib",
+  "altair",
   "folium",
   "streamlit",
   "streamlit-folium",
@@ -40,6 +41,11 @@ src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+# CSS, JS y rutas SVG en línea: no se parten sin romper el contenido.
+"src/rutas/report/mapas.py" = ["E501"]
+"src/rutas/report/iconos.py" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
