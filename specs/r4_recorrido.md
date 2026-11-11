@@ -1,6 +1,6 @@
 # Spec: R4 · Ruta óptima de recorrido (viajante asimétrico)
 
-**Autor:** Claude (borrador con el grupo) · **Revisor:** <pendiente: nombre distinto del autor> · **Estado:** borrador (la recurrencia de Held-Karp se fija aquí, antes de programarla)
+**Autor:** Claude (borrador con el grupo) · **Revisor:** JhonyAlexanderPerea (asignado, pendiente de revisión) · **Estado:** implementada (revisión pendiente); decisiones D13 y D14 aprobadas en PARADA 6
 
 ## Objetivo
 Dado un lugar de partida y k lugares a visitar, encontrar el recorrido de menor tiempo total que sale de la partida, visita cada lugar una vez y regresa. Se usa la matriz de tiempos de R2 (asimétrica).
@@ -55,13 +55,13 @@ Sea `s` la partida, y para un subconjunto `S` de lugares y un lugar `j ∈ S`:
 ## Cómo se mide
 Protocolo de la sección 6: máquina oficial (D1), mediana de 5 repeticiones, límite de 5 minutos, solo la llamada cronometrada. Para k de 5 a 12, o hasta que una ejecución pase el límite. Las instancias se eligen al azar de todo el catálogo, sin Armenia, con semilla derivada de (SEED, k, número de instancia). La partida es Armenia.
 
-## Decisiones abiertas (PARADA 6)
-- **Heurística (D13):** propuesta, voraz del vecino más cercano dirigido. Hay que aprobarla y justificarla frente a alternativas.
-- **Atractivos del itinerario y criterio para quitarlos si no caben en 11 h:** pendientes del grupo.
+## Decisiones de PARADA 6 (aprobadas)
+- **Heurística (D13):** voraz del vecino más cercano dirigido, aprobada.
+- **Atractivos del itinerario y regla de corte a 11 h (D14):** aprobados. Los atractivos son provisionales (semilla 42) y el grupo puede elegirlos a mano.
 
 ## Criterio de terminado
-- [ ] Tres solvers con tests en verde.
-- [ ] Verificación cruzada de fuerza bruta y Held-Karp.
-- [ ] Experimentos: exactas (k=5 a 12), calidad de la heurística (k=5, 8, 10, 12, con ≥ 5 instancias), itinerario, y ejemplo voraz frente a óptimo.
+- [x] Tres solvers con tests en verde (15 pasan con `uv run pytest -k "tsp or heldkarp or bruteforce or greedy"`).
+- [x] Verificación cruzada de fuerza bruta y Held-Karp (incluida en esos tests).
+- [x] Experimentos generados: `results/r4_exactas.csv`, `r4_heuristica.csv`, `r4_itinerario.csv`, `r4_ejemplo_voraz.csv`. Pendiente confirmar que la calidad de la heurística cubre k=5, 8, 10 y 12 con ≥ 5 instancias.
 - [ ] Citas de Held-Karp y de Cormen confirmadas.
 - [ ] Revisión por una persona distinta del autor.
