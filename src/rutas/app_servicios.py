@@ -77,6 +77,7 @@ def ruta_optima(
         "distancia_km": dist_m / 1000,
         "velocidad_kmh": (dist_m / 1000) / (tiempo_min / 60) if tiempo_min else 0.0,
         "nodos": list(res.path),
+        "explorados": res.explored,
         "polilinea": [nodos_latlon[n] for n in res.path],
     }
 
@@ -120,6 +121,17 @@ def metricas_envolvente(vertices: list[dict]) -> dict:
     area = abs(sum(x1 * y2 - x2 * y1 for (x1, y1), (x2, y2) in pares)) / 2
     perimetro = sum(math.hypot(x2 - x1, y2 - y1) for (x1, y1), (x2, y2) in pares)
     return {"area_km2": area / 1e6, "perimetro_km": perimetro / 1000, "vertices": len(xy)}
+
+
+def distancia_recta_km(a: tuple[float, float], b: tuple[float, float]) -> float:
+    """Distancia en línea recta (haversine) entre dos puntos (lat, lon), en km."""
+    (la1, lo1), (la2, lo2) = a, b
+    p1, p2 = math.radians(la1), math.radians(la2)
+    h = (
+        math.sin((p2 - p1) / 2) ** 2
+        + math.cos(p1) * math.cos(p2) * math.sin(math.radians(lo2 - lo1) / 2) ** 2
+    )
+    return 2 * 6371.0088 * math.asin(math.sqrt(h))
 
 
 def formato_duracion(minutos: float) -> str:

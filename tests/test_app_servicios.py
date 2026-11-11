@@ -263,3 +263,13 @@ def test_itinerario_incluye_tramos_que_suman_el_desplazamiento():
 )
 def test_formato_duracion(minutos, texto):
     assert svc.formato_duracion(minutos) == texto
+
+
+def test_ruta_optima_informa_nodos_explorados():
+    r = svc.ruta_optima(_grafo_pequeno(), NODOS, 0, 2)
+    assert r["explorados"] == 3
+
+
+def test_distancia_recta_un_grado_de_latitud():
+    assert svc.distancia_recta_km((4.0, -75.0), (5.0, -75.0)) == pytest.approx(111.19, abs=0.1)
+    assert svc.distancia_recta_km((4.5, -75.6), (4.5, -75.6)) == 0.0
