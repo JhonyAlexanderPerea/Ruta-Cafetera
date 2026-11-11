@@ -103,14 +103,14 @@ def mapa_ruta(polilinea: list[tuple[float, float]], origen: dict, destino: dict)
 
 _JS_EXPLORACION = """
 window.addEventListener('load', function () {
-  var map = __MAPA__, pts = __PUNTOS__, ruta = __RUTA__;
+  var map = __MAPA__, pts = __PUNTOS__, ruta = __RUTA__, total = __TOTAL__;
   var lienzo = L.canvas({padding: 0.5}), capa = L.layerGroup().addTo(map);
   var viva = null, i = 0, paso = 1, activo = false, n = pts.length;
   var ctl = L.control({position: 'topright'});
   ctl.onAdd = function () {
     var d = L.DomUtil.create('div', 'expl-panel');
     d.innerHTML = '<small>Nodos explorados por Dijkstra</small><b id="ex-n">0</b>' +
-      ' <span style="color:#a1a1a6">/ ' + n.toLocaleString('es') + '</span>' +
+      ' <span style="color:#a1a1a6">/ ' + total.toLocaleString('es') + '</span>' +
       '<div class="expl-barra"><i id="ex-b"></i></div>' +
       '<button id="ex-play">Pausar</button><button id="ex-re">Repetir</button>' +
       '<div style="margin-top:8px"><button data-v="1" class="on">1×</button>' +
@@ -130,7 +130,7 @@ window.addEventListener('load', function () {
       L.circleMarker(pts[i], {renderer: lienzo, radius: 3.2, stroke: false,
         fillColor: color(i / n), fillOpacity: 0.85}).addTo(capa);
     }
-    el('ex-n').textContent = i.toLocaleString('es');
+    el('ex-n').textContent = Math.round(total * i / n).toLocaleString('es');
     el('ex-b').style.width = (100 * i / n) + '%';
     if (i < n) { requestAnimationFrame(fotograma); return; }
     activo = false; el('ex-play').textContent = 'Reproducir';
@@ -164,6 +164,7 @@ def mapa_exploracion(
     polilinea: list[tuple[float, float]],
     origen: dict,
     destino: dict,
+    total: int | None = None,
 ) -> folium.Map:
     """Mapa que reproduce la expansión de Dijkstra y al final dibuja la ruta óptima."""
     m = mapa_base(polilinea[0], 11)
@@ -172,6 +173,7 @@ def mapa_exploracion(
         _JS_EXPLORACION.replace("__MAPA__", m.get_name())
         .replace("__PUNTOS__", json.dumps(puntos))
         .replace("__RUTA__", json.dumps(polilinea))
+        .replace("__TOTAL__", str(int(total or len(puntos))))
     )
     m.get_root().script.add_child(folium.Element(js))
     return m
