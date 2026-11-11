@@ -195,3 +195,67 @@ def test_ruta_optima_coincide_con_r2_dijkstra(origen, destino, esperado_s):
     assert "error" not in r
     # La tabla redondea a 2 decimales en segundos.
     assert r["tiempo_min"] * 60 == pytest.approx(esperado_s, abs=0.01)
+
+
+# ---------- Datos extra para la interfaz (distancia, exploración, envolvente) ----------
+
+
+def test_ruta_optima_distancia_y_velocidad():
+    # Ruta 0->1->2: 10 m + 50 m = 60 m en 3 min.
+    r = svc.ruta_optima(_grafo_pequeno(), NODOS, 0, 2)
+    assert r["distancia_km"] == pytest.approx(0.06)
+    assert r["velocidad_kmh"] == pytest.approx(0.06 / (3.0 / 60))
+    assert r["nodos"] == [0, 1, 2]
+
+
+def test_nodos_explorados_en_orden_de_cercania():
+    g = _grafo_pequeno()
+    pts = svc.nodos_explorados(g, NODOS, 0, 2)
+    # Dijkstra fija 0 (0 s), 1 (60 s) y 2 (180 s): ese es el orden de exploración.
+    assert pts == [NODOS[0], NODOS[1], NODOS[2]]
+
+
+def test_nodos_explorados_respeta_el_maximo_y_conserva_extremos():
+    n = 50
+    g = CSRGraph(
+        indptr=np.array([*range(n), n - 1, n - 1][: n + 1], dtype=np.int64),
+        indices=np.arange(1, n, dtype=np.int32),
+        dist_m=np.full(n - 1, 10.0),
+        time_s=np.full(n - 1, 5.0),
+    )
+    nodos = {i: (4.0 + i / 100, -75.0) for i in range(n)}
+    pts = svc.nodos_explorados(g, nodos, 0, n - 1, maximo=10)
+    assert len(pts) <= 10
+    assert pts[0] == nodos[0] and pts[-1] == nodos[n - 1]
+
+
+def test_nodos_explorados_sin_ruta_devuelve_vacio():
+    assert svc.nodos_explorados(_grafo_pequeno(), NODOS, 2, 0) == []
+
+
+def test_metricas_envolvente_cuadrado():
+    v = [{"x_utm": 0, "y_utm": 0}, {"x_utm": 2000, "y_utm": 0},
+         {"x_utm": 2000, "y_utm": 3000}, {"x_utm": 0, "y_utm": 3000}]
+    m = svc.metricas_envolvente(v)
+    assert m["area_km2"] == pytest.approx(6.0)
+    assert m["perimetro_km"] == pytest.approx(10.0)
+    assert m["vertices"] == 4
+
+
+def test_itinerario_incluye_tramos_que_suman_el_desplazamiento():
+    n = 7
+    m = _matriz_aleatoria(n, semilla=3)
+    ids = _ids(n)
+    r = svc.itinerario(m, ids, {i: 10.0 for i in ids}, "p0", ids[1:])
+    for clave in ("heldkarp", "voraz"):
+        tramos = r[clave]["tramos_min"]
+        assert len(tramos) == len(r[clave]["orden"]) + 1  # incluye el regreso a la partida
+        assert sum(tramos) == pytest.approx(r[clave]["desplazamiento_min"])
+
+
+@pytest.mark.parametrize(
+    "minutos,texto",
+    [(0, "0 min"), (45, "45 min"), (60, "1 h"), (65.4, "1 h 05 min"), (125, "2 h 05 min")],
+)
+def test_formato_duracion(minutos, texto):
+    assert svc.formato_duracion(minutos) == texto
