@@ -71,6 +71,11 @@ def explorados(g_ruta: str, n_ruta: str, origen: int, destino: int):
     return svc.nodos_explorados(grafo(g_ruta), nodos(n_ruta), origen, destino)
 
 
+@st.cache_data(show_spinner=False)
+def tramos(g_ruta: str, n_ruta: str, paradas: tuple[int, ...]):
+    return svc.tramos_polilinea(grafo(g_ruta), nodos(n_ruta), list(paradas))
+
+
 def faltan(*archivos: Path) -> bool:
     """Muestra un error por cada archivo ausente; True si falta alguno."""
     ausentes = [a for a in archivos if not a.exists()]
@@ -209,8 +214,15 @@ def vista_ruta():
             components.html(m.get_root().render(), height=500)
         else:
             m = mapas.mapa_ruta(res["polilinea"], a, b)
+            centro, zoom = mapas.encuadre(res["polilinea"])
             st_folium(
-                m, height=500, width=None, key=f"mapa_ruta_{a['id']}_{b['id']}", returned_objects=[]
+                m,
+                center=centro,
+                zoom=zoom,
+                height=500,
+                width=None,
+                key=f"mapa_ruta_{a['id']}_{b['id']}",
+                returned_objects=[],
             )
 
 
@@ -289,7 +301,16 @@ def vista_envolvente():
             )
         )
         m = mapas.mapa_envolvente(vert, visibles, poligono, marcas)
-        st_folium(m, height=520, width=None, key="mapa_hull", returned_objects=[])
+        centro, zoom = mapas.encuadre(vert)
+        st_folium(
+            m,
+            center=centro,
+            zoom=zoom,
+            height=520,
+            width=None,
+            key="mapa_hull",
+            returned_objects=[],
+        )
         csv = RESULTS / "r3_envolvente.csv"
         if not csv.exists():
             st.info(f"No se encontró {csv.name} en results/.")
@@ -325,6 +346,39 @@ def _recorrido(titulo: str, r: dict, nombre: dict, dur: dict, partida: str, mejo
         html_(ui.barra_limite(r["total_min"], UMBRAL_MIN))
         if r["total_min"] > UMBRAL_MIN:
             st.warning(f"El total supera 11 h ({UMBRAL_MIN} min).")
+
+
+def _mapa_itinerario(res: dict, por_id: dict, partida: str) -> None:
+    g, n = DATA / "graph_csr.npz", DATA / "nodes.csv"
+    with tarjeta(
+        "Mapa del recorrido",
+        "Rutas por carretera entre paradas, numeradas en el orden de visita.",
+        "ruta",
+    ):
+        if not (g.exists() and n.exists()):
+            st.info("Faltan graph_csr.npz o nodes.csv para dibujar el mapa: " + PISTA + ".")
+            return
+        opciones = {"Óptimo · Held-Karp": "heldkarp", "Heurística · voraz": "voraz"}
+        eleccion = st.segmented_control(
+            "Recorrido", list(opciones), default="Óptimo · Held-Karp", key="mapa_recorrido"
+        )
+        clave = opciones[eleccion or "Óptimo · Held-Karp"]
+        r = res[clave]
+        ids = [partida, *r["orden"], partida]
+        legs = tramos(str(g), str(n), tuple(por_id[i]["nodo_idx"] for i in ids))
+        orden_txt = " → ".join(html.escape(por_id[i]["nombre"]) for i in ids)
+        html_(f"<p class='ruta-orden'>{orden_txt}</p>")
+        m = mapas.mapa_itinerario(legs, [por_id[i] for i in ids[:-1]], r["tramos_min"])
+        centro, zoom = mapas.encuadre([pt for tramo in legs for pt in tramo])
+        st_folium(
+            m,
+            center=centro,
+            zoom=zoom,
+            height=520,
+            width=None,
+            key=f"mapa_it_{clave}_{'_'.join(ids)}",
+            returned_objects=[],
+        )
 
 
 def vista_itinerario():
@@ -382,6 +436,7 @@ def vista_itinerario():
         with der:
             _recorrido("Heurística · voraz", res["voraz"], nombre, dur, partida, False)
         grafica(graficas.grafica_comparacion(res["heldkarp"], res["voraz"]))
+        _mapa_itinerario(res, {x["id"]: x for x in lug}, partida)
         html_(
             f"<span class='pastilla'>Diferencia voraz − óptimo: "
             f"{res['diferencia_min']:.1f} min ({res['diferencia_pct']:.1f} %)</span>"

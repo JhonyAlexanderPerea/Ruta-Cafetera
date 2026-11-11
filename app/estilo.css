@@ -471,3 +471,9 @@ ul[role="listbox"] li[aria-selected="true"] { box-shadow: inset 3px 0 0 var(--ac
   }
   [data-testid="stVerticalBlockBorderWrapper"] { padding: 1rem; }
 }
+
+/* Las métricas de las tarjetas de recorrido no deben cortarse con "…". */
+[data-testid="stMetricValue"] { font-size: 1.5rem !important; }
+[data-testid="stMetricValue"] > div, [data-testid="stMetricLabel"] > div {
+  white-space: normal !important; overflow: visible !important; text-overflow: clip !important;
+}
