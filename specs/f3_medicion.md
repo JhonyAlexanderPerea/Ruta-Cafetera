@@ -1,6 +1,6 @@
 # Spec: F3 · Infraestructura de medición
 
-**Autor:** Claude (borrador con el grupo) · **Revisor:** <pendiente: nombre distinto del autor> · **Estado:** implementada (revisión pendiente)
+**Autor:** Claude (borrador con el grupo) · **Revisor:** JhonyAlexanderPerea (asignado, pendiente de revisión) · **Estado:** implementada (revisión pendiente)
 
 ## Objetivo
 Un único módulo que aplique el protocolo de la sección 6 del enunciado a cualquier algoritmo, y que registre la máquina y el entorno de cada medición.

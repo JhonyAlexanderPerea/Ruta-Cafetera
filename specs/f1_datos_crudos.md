@@ -1,6 +1,6 @@
 # Spec: F1 · Datos crudos (red vial, catálogo y pares de medición)
 
-**Autor:** Claude (borrador con el grupo) · **Revisor:** <pendiente: nombre distinto del autor> · **Estado:** aprobada en PARADA 1 (falta la firma del revisor)
+**Autor:** Claude (borrador con el grupo) · **Revisor:** JhonyAlexanderPerea (asignado, pendiente de revisión) · **Estado:** aprobada en PARADA 1 (falta la firma del revisor)
 
 ## Objetivo
 Dejar en `data/raw/` los datos de entrada del proyecto, sin transformarlos: la red vial del Quindío y las cuatro redes por radio alrededor de la plaza de Bolívar (descargadas con OSMnx), el catálogo de al menos 40 lugares con coordenadas verificadas, y los 20 pares de medición de Dijkstra. Todo con la evidencia necesaria para reproducirlo (fecha, versión, conteos y hash).

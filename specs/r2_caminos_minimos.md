@@ -1,6 +1,6 @@
 # Spec: R2 · Caminos mínimos (Dijkstra)
 
-**Autor:** Claude (borrador con el grupo) · **Revisor:** <pendiente: nombre distinto del autor> · **Estado:** implementada (revisión pendiente)
+**Autor:** Claude (borrador con el grupo) · **Revisor:** JhonyAlexanderPerea (asignado, pendiente de revisión) · **Estado:** implementada (revisión pendiente)
 
 ## Objetivo
 Implementar Dijkstra en dos versiones (búsqueda lineal O(V²) y cola de prioridad O((V+E) log V)), medirlas en la red del departamento y calcular la matriz de tiempos entre los lugares del catálogo.
