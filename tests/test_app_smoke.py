@@ -20,8 +20,8 @@ hay_datos = pytest.mark.skipif(
 def test_cada_vista_arranca_sin_excepciones(vista):
     app = AppTest.from_file(APP, default_timeout=60).run()
     assert not app.exception
-    assert list(app.sidebar.radio[0].options) == VISTAS
-    app.sidebar.radio[0].set_value(vista).run()
+    assert list(app.radio[0].options) == VISTAS
+    app.radio[0].set_value(vista).run()
     assert not app.exception
 
 
@@ -36,7 +36,7 @@ def test_datos_faltantes_muestra_error_sin_caerse(tmp_path, monkeypatch):
 @hay_datos
 def test_itinerario_con_seis_atractivos_muestra_ambos_recorridos():
     app = AppTest.from_file(APP, default_timeout=60).run()
-    app.sidebar.radio[0].set_value("Itinerario").run()
+    app.radio[0].set_value("Itinerario").run()
     assert app.error == [] or all("Elige" in e.value for e in app.error)
     opciones = list(app.multiselect[0].options)
     app.multiselect[0].set_value(opciones[:6]).run()
