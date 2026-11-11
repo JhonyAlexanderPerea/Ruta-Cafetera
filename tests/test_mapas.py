@@ -54,3 +54,17 @@ def test_mapa_itinerario_numera_paradas_y_dibuja_tramos():
     out = _html(mapas.mapa_itinerario(legs, paradas, [30.0, 25.0]))
     assert "Tramo 1" in out and "Tramo 2" in out and "ruta-viva" in out
     assert "A <i>" not in out and "A &lt;i&gt;" in out
+
+
+def test_encuadre_centra_y_acerca_mas_cuanto_menor_es_el_area():
+    chico = [(4.50, -75.60), (4.52, -75.58)]
+    grande = [(4.0, -76.0), (5.0, -75.0)]
+    (c_lat, c_lon), z_chico = mapas.encuadre(chico)
+    _, z_grande = mapas.encuadre(grande)
+    assert (c_lat, c_lon) == pytest.approx((4.51, -75.59))
+    assert z_chico > z_grande
+    assert 3 <= z_grande <= 15 and 3 <= z_chico <= 15
+
+
+def test_encuadre_de_un_solo_punto_no_falla():
+    assert mapas.encuadre([(4.5, -75.6)])[1] == 14

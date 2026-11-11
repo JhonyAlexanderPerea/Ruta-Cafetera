@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import html
 import json
+import math
 
 import folium
 
@@ -94,10 +95,9 @@ def _extremos(m: folium.Map, origen: dict, destino: dict) -> None:
 
 
 def mapa_ruta(polilinea: list[tuple[float, float]], origen: dict, destino: dict) -> folium.Map:
-    m = mapa_base(polilinea[0], 11)
+    m = mapa_base(*encuadre(polilinea))
     _ruta_con_brillo(m, polilinea)
     _extremos(m, origen, destino)
-    m.fit_bounds(polilinea, padding=(40, 40))
     return m
 
 
@@ -186,11 +186,7 @@ def mapa_envolvente(
     mostrar_vertices: bool = False,
 ) -> folium.Map:
     """Envolvente convexa con un pin por lugar, coloreado por categoría."""
-    centro = (
-        sum(v[0] for v in vertices) / len(vertices),
-        sum(v[1] for v in vertices) / len(vertices),
-    )
-    m = mapa_base(centro, 9)
+    m = mapa_base(*encuadre(vertices))
     if mostrar_poligono:
         folium.Polygon(
             vertices,
@@ -215,8 +211,6 @@ def mapa_envolvente(
             icon=_pin(color, icono),
             tooltip=_tooltip(x["nombre"], f"{x['municipio']} · {x['categoria']}"),
         ).add_to(m)
-    if len(vertices) > 1:
-        m.fit_bounds(vertices, padding=(20, 20))
     return m
 
 
@@ -246,7 +240,7 @@ def mapa_itinerario(
     `paradas` va en orden de visita (la primera es la partida); `tramos` y `minutos`
     traen un elemento por cada par consecutivo, incluido el regreso."""
     todos = [pt for tramo in tramos for pt in tramo]
-    m = mapa_base(todos[0], 10)
+    m = mapa_base(*encuadre(todos))
     n = len(tramos)
     for k, (tramo, mins) in enumerate(zip(tramos, minutos, strict=True), start=1):
         color = f"hsl({140 - 100 * (k - 1) / max(n - 1, 1):.0f},85%,58%)"
@@ -267,5 +261,23 @@ def mapa_itinerario(
             tooltip=_tooltip(x["nombre"], "Partida y regreso" if inicio else f"Parada {k}"),
             z_index_offset=1000 - k,
         ).add_to(m)
-    m.fit_bounds(todos, padding=(30, 30))
     return m
+
+
+def encuadre(
+    puntos: list[tuple[float, float]], ancho_px: int = 900, alto_px: int = 520
+) -> tuple[tuple[float, float], int]:
+    """Centro y zoom de Leaflet que encierran los puntos (con margen).
+
+    Se calcula aquí porque st_folium impone su propia vista e ignora fit_bounds."""
+    lats = [p[0] for p in puntos]
+    lons = [p[1] for p in puntos]
+    centro = ((min(lats) + max(lats)) / 2, (min(lons) + max(lons)) / 2)
+    span_lat = max(max(lats) - min(lats), 1e-6) * 1.3
+    span_lon = max(max(lons) - min(lons), 1e-6) * 1.3
+    if len(puntos) < 2 or (max(lats) == min(lats) and max(lons) == min(lons)):
+        return centro, 14
+    escala_lat = 1 / max(math.cos(math.radians(centro[0])), 0.1)
+    z_lon = math.log2(ancho_px / 256 * 360 / span_lon)
+    z_lat = math.log2(alto_px / 256 * 180 / (span_lat * escala_lat))
+    return centro, max(3, min(15, int(min(z_lon, z_lat))))
