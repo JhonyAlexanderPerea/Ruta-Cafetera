@@ -144,15 +144,15 @@ def vista_envolvente():
                 (x["lat"], x["lon"]), radius=4, color="#0a84ff", fill=True, tooltip=x["nombre"]
             ).add_to(m)
         st_folium(m, height=500, width=None, key="mapa_hull", returned_objects=[])
-    csv = RESULTS / "r3_envolvente.csv"
-    if not csv.exists():
-        st.info(f"No se encontró {csv.name} en results/.")
-        return
-    fila = tabla(str(csv)).iloc[0]
-    st.caption(
-        f"Conjunto: {fila['conjunto']} ({int(fila['n'])} puntos) · "
-        f"{int(fila['vertices'])} vértices en la envolvente."
-    )
+        csv = RESULTS / "r3_envolvente.csv"
+        if not csv.exists():
+            st.info(f"No se encontró {csv.name} en results/.")
+            return
+        fila = tabla(str(csv)).iloc[0]
+        st.caption(
+            f"Conjunto: {fila['conjunto']} ({int(fila['n'])} puntos) · "
+            f"{int(fila['vertices'])} vértices en la envolvente."
+        )
 
 
 def vista_itinerario():
