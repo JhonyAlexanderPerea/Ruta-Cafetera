@@ -1,0 +1,3 @@
+ruta,orden,costo_s
+voraz,cab_01 -> ac_03 -> fi_04 -> at_14 -> cab_12 -> fi_01 -> cab_01,11802.7
+optimo_held_karp,cab_01 -> cab_12 -> at_14 -> fi_04 -> fi_01 -> ac_03 -> cab_01,10955.7

@@ -1,0 +1,479 @@
+/* Tema visual de la app: oscuro, vidrio esmerilado, acento azul y café.
+   Solo presentación. La lógica vive en src/rutas/app_servicios.py. */
+
+:root {
+  --fondo: #000000;
+  --fondo-2: #0b0d12;
+  --vidrio: rgba(28, 28, 30, 0.68);
+  --vidrio-borde: rgba(255, 255, 255, 0.10);
+  --texto: #f5f5f7;
+  --texto-2: #a1a1a6;
+  --acento: #0a84ff;
+  --cafe: #c8a27a;
+  --peligro: #ff453a;
+  --radio: 22px;
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --sombra-hover: 0 18px 44px rgba(0, 0, 0, 0.55);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --fuente: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html, body, .stApp {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(10, 132, 255, 0.16), transparent 60%),
+    radial-gradient(900px 500px at 110% 0%, rgba(200, 162, 122, 0.12), transparent 55%),
+    var(--fondo) !important;
+  color: var(--texto);
+  font-family: var(--fuente);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Oculta el menú y el pie de Streamlit para una vista limpia. */
+#MainMenu, footer { visibility: hidden; }
+header[data-testid="stHeader"] { background: transparent; }
+
+.block-container {
+  max-width: 1180px;
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+/* ---------- Encabezado ---------- */
+.cabecera { margin: 0 0 1.75rem 0; animation: subir 0.7s var(--ease) both; }
+.cabecera .marca {
+  font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--cafe); font-weight: 600; margin: 0 0 0.35rem 0;
+}
+.cabecera h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; letter-spacing: -0.03em;
+  margin: 0; line-height: 1.05; color: var(--texto);
+}
+.cabecera p { color: var(--texto-2); margin: 0.5rem 0 0 0; font-size: 1.05rem; }
+
+/* ---------- Selector de vistas (segmentado) ---------- */
+div[role="radiogroup"] {
+  display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07); border: 1px solid var(--vidrio-borde);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"] {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 44px; border-radius: 999px; padding: 0.45rem 1.05rem; cursor: pointer;
+  transition: background 0.35s var(--ease), box-shadow 0.35s var(--ease), transform 0.2s var(--ease);
+  margin: 0 !important;
+}
+/* Oculta el círculo del radio: solo se ve el texto de cada pestaña. */
+div[role="radiogroup"] label[data-testid="stRadioOption"] > div > div:first-child {
+  display: none !important;
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"] p {
+  color: var(--texto-2); font-weight: 500; font-size: 0.95rem; margin: 0;
+  transition: color 0.3s var(--ease);
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"]:hover p { color: var(--texto); }
+div[role="radiogroup"] label[data-testid="stRadioOption"]:active { transform: scale(0.97); }
+div[role="radiogroup"] label[data-testid="stRadioOption"]:has(input:checked) {
+  background: var(--texto); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"]:has(input:checked) p {
+  color: #000; font-weight: 600;
+}
+div[role="radiogroup"] label[data-testid="stRadioOption"]:has(input:focus-visible) {
+  outline: 2px solid var(--acento); outline-offset: 2px;
+}
+
+/* ---------- Tarjetas (contenedores con borde) ---------- */
+[data-testid="stVerticalBlockBorderWrapper"] > div > div > [data-testid="stVerticalBlock"] {
+  gap: 0.9rem;
+}
+div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div) {
+  border-radius: var(--radio) !important;
+}
+[data-testid="stVerticalBlockBorderWrapper"] {
+  background: var(--vidrio);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid var(--vidrio-borde) !important;
+  border-radius: var(--radio) !important;
+  box-shadow: var(--sombra);
+  padding: 1.25rem 1.35rem;
+  transition: box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+}
+[data-testid="stVerticalBlockBorderWrapper"]:hover {
+  box-shadow: var(--sombra-hover);
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+/* Tarjetas anidadas (p. ej. Itinerario): sin doble vidrio ni doble sombra. */
+[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlockBorderWrapper"] {
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+  background: rgba(255, 255, 255, 0.03); box-shadow: none;
+}
+
+/* ---------- Títulos dentro de tarjetas ---------- */
+h2, h3, [data-testid="stHeading"] h2, [data-testid="stHeading"] h3 {
+  color: var(--texto) !important; letter-spacing: -0.02em; font-weight: 650;
+}
+h3 { font-size: 1.35rem !important; }
+
+/* ---------- Métricas tipo tarjeta del clima ---------- */
+[data-testid="stMetric"] {
+  background: rgba(255, 255, 255, 0.04); border: 1px solid var(--vidrio-borde);
+  border-radius: 16px; padding: 0.85rem 1rem;
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+[data-testid="stMetric"]:hover { background: rgba(255, 255, 255, 0.07); }
+[data-testid="stMetricLabel"] p {
+  color: var(--texto-2) !important; font-size: 0.82rem !important; font-weight: 500;
+}
+[data-testid="stMetricValue"] {
+  color: var(--texto) !important; font-weight: 700; letter-spacing: -0.02em;
+}
+
+/* ---------- Campos ---------- */
+[data-baseweb="select"] > div, [data-baseweb="input"] > div {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid var(--vidrio-borde) !important;
+  border-radius: 14px !important;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+[data-baseweb="select"] > div:hover { border-color: rgba(255, 255, 255, 0.25) !important; }
+[data-baseweb="select"] > div:focus-within {
+  border-color: var(--acento) !important;
+  box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.25);
+}
+label[data-testid="stWidgetLabel"] p {
+  color: var(--texto-2) !important; font-size: 0.85rem !important; font-weight: 500;
+}
+
+/* ---------- Mensajes ---------- */
+[data-testid="stAlert"] { border-radius: 16px !important; border: 1px solid var(--vidrio-borde); }
+
+/* ---------- Mapas, tablas e imágenes ---------- */
+iframe { border-radius: 18px; border: 1px solid var(--vidrio-borde); }
+[data-testid="stDataFrame"] { border-radius: 16px; overflow: hidden; }
+[data-testid="stImage"] img {
+  border-radius: 16px; transition: transform 0.5s var(--ease);
+}
+[data-testid="stImage"]:hover img { transform: scale(1.01); }
+[data-testid="stCaptionContainer"] p { color: var(--texto-2) !important; }
+
+/* ---------- Pastilla de diferencia ---------- */
+.pastilla {
+  display: inline-block; padding: 0.35rem 0.8rem; border-radius: 999px;
+  background: rgba(200, 162, 122, 0.16); color: var(--cafe);
+  font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(200, 162, 122, 0.3);
+}
+.ruta-orden { color: var(--texto-2); font-size: 0.98rem; line-height: 1.6; margin: 0.25rem 0 0.75rem; }
+
+/* ---------- Iconos ---------- */
+.ico { flex: none; vertical-align: -0.2em; }
+.cabecera .marca { display: flex; align-items: center; gap: 0.45rem; }
+
+/* ---------- Cabecera de tarjeta ---------- */
+.tarjeta-cab { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.2rem; }
+.tarjeta-ico {
+  display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px;
+  color: var(--acento); background: rgba(10, 132, 255, 0.14);
+  border: 1px solid rgba(10, 132, 255, 0.28);
+  transition: transform 0.5s var(--ease), background 0.3s var(--ease);
+}
+[data-testid="stVerticalBlockBorderWrapper"]:hover > div > div > div .tarjeta-ico {
+  transform: rotate(-8deg) scale(1.06);
+}
+.tarjeta-titulo {
+  margin: 0; padding: 0; font-size: 1.3rem !important; font-weight: 650;
+  letter-spacing: -0.02em; color: var(--texto);
+  display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+}
+.tarjeta-sub { margin: 0.1rem 0 0; color: var(--texto-2); font-size: 0.92rem; }
+.insignia {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: #04210d; background: #30d158; padding: 0.18rem 0.6rem; border-radius: 999px;
+}
+
+/* ---------- Rejilla de datos ---------- */
+.datos {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.75rem; margin: 0.4rem 0 0.4rem;
+}
+.dato {
+  --t: var(--acento);
+  position: relative; display: grid; gap: 0.15rem; padding: 0.95rem 1rem 0.9rem;
+  border-radius: 18px; overflow: hidden; border: 1px solid var(--vidrio-borde);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--t) 16%, transparent), rgba(255,255,255,0.03) 70%);
+  animation: aparecer 0.6s var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms);
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.dato.azul { --t: #0a84ff; } .dato.cafe { --t: #c8a27a; }
+.dato.verde { --t: #30d158; } .dato.naranja { --t: #ff9f0a; }
+.dato:hover {
+  transform: translateY(-4px); border-color: color-mix(in srgb, var(--t) 55%, transparent);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--t) 22%, transparent);
+}
+.dato-ico {
+  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px;
+  color: var(--t); background: color-mix(in srgb, var(--t) 18%, transparent);
+  margin-bottom: 0.35rem; transition: transform 0.45s var(--ease);
+}
+.dato:hover .dato-ico { transform: scale(1.12) rotate(-6deg); }
+.dato-e { color: var(--texto-2); font-size: 0.8rem; font-weight: 500; }
+.dato-v { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.dato-u { font-size: 0.95rem; font-weight: 600; color: var(--texto-2); }
+.dato small { color: var(--texto-2); font-size: 0.78rem; }
+
+/* ---------- Botones ---------- */
+.stButton > button, [data-testid="stBaseButton-secondary"], [data-testid="stBaseButton-primary"] {
+  border-radius: 999px; border: 1px solid var(--vidrio-borde); min-height: 44px;
+  background: rgba(255, 255, 255, 0.07); color: var(--texto); font-weight: 600;
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease),
+    box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.stButton > button:hover {
+  transform: translateY(-2px); background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+.stButton > button:active { transform: scale(0.96); }
+.stButton > button[kind="primary"], [data-testid="stBaseButton-primary"] {
+  background: linear-gradient(135deg, #0a84ff, #5e5ce6); border-color: transparent; color: #fff;
+}
+.stButton > button[kind="primary"]:hover, [data-testid="stBaseButton-primary"]:hover {
+  box-shadow: 0 12px 30px rgba(10, 132, 255, 0.45);
+  background: linear-gradient(135deg, #2b95ff, #7371f0);
+}
+.stButton > button [data-testid="stIconMaterial"] { transition: transform 0.5s var(--ease); }
+.stButton > button:hover [data-testid="stIconMaterial"] { transform: rotate(180deg) scale(1.1); }
+[data-testid="stBaseButton-primary"]:hover [data-testid="stIconMaterial"] { transform: scale(1.2); }
+
+/* ---------- Desplegables (selectbox / multiselect) ---------- */
+[data-baseweb="select"] svg { transition: transform 0.35s var(--ease); }
+[data-baseweb="select"]:has(input[aria-expanded="true"]) > div > div:last-child svg {
+  transform: rotate(180deg);
+}
+div[data-baseweb="popover"] > div {
+  background: rgba(28, 28, 30, 0.94) !important;
+  backdrop-filter: blur(22px) saturate(150%); -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 16px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6); overflow: hidden;
+  transform-origin: top center; animation: abrir 0.3s var(--ease) both;
+}
+ul[role="listbox"] { padding: 6px !important; background: transparent !important; }
+ul[role="listbox"] li {
+  border-radius: 10px; margin: 2px 0; background: transparent !important;
+  transition: background 0.18s var(--ease), transform 0.2s var(--ease), padding 0.2s var(--ease);
+}
+ul[role="listbox"] li:hover, ul[role="listbox"] li[aria-selected="true"] {
+  background: rgba(10, 132, 255, 0.24) !important; transform: translateX(3px);
+}
+ul[role="listbox"] li[aria-selected="true"] { box-shadow: inset 3px 0 0 var(--acento); }
+[data-baseweb="tag"] {
+  background: rgba(10, 132, 255, 0.2) !important; border: 1px solid rgba(10, 132, 255, 0.4);
+  border-radius: 999px !important; animation: pop 0.35s var(--ease) both;
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+}
+[data-baseweb="tag"]:hover { background: rgba(10, 132, 255, 0.34) !important; transform: scale(1.04); }
+
+/* ---------- Pastillas (st.pills) e interruptores ---------- */
+[data-testid="stButtonGroup"] button {
+  border-radius: 999px; min-height: 40px; font-weight: 600;
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease),
+    box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+[data-testid="stButtonGroup"] button:hover { transform: translateY(-2px); }
+[data-testid="stButtonGroup"] button:active { transform: scale(0.94); }
+[data-testid="stButtonGroup"] button[aria-checked="true"],
+[data-testid="stButtonGroup"] button[aria-pressed="true"] {
+  box-shadow: 0 6px 18px rgba(10, 132, 255, 0.28);
+}
+[data-testid="stCheckbox"] label, [data-testid="stToggle"] label { cursor: pointer; }
+
+/* ---------- Pestañas (R1 a R4) ---------- */
+[role="tablist"] {
+  display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; max-width: 100%;
+  background: rgba(255, 255, 255, 0.07); border: 1px solid var(--vidrio-borde);
+  margin-bottom: 1rem; overflow-x: auto; border-bottom: 1px solid var(--vidrio-borde) !important;
+}
+[data-testid="stTab"] {
+  position: relative; border-radius: 999px; padding: 0.4rem 1.05rem; min-height: 40px;
+  display: flex; align-items: center; cursor: pointer; isolation: isolate;
+  transition: background 0.3s var(--ease), transform 0.2s var(--ease);
+}
+[data-testid="stTab"] p { color: var(--texto-2); font-weight: 500; transition: color 0.3s var(--ease); }
+[data-testid="stTab"]:hover { background: rgba(255, 255, 255, 0.08); }
+[data-testid="stTab"]:hover p { color: var(--texto); }
+[data-testid="stTab"]:active { transform: scale(0.97); }
+[data-testid="stTab"][aria-selected="true"] p { color: #000 !important; font-weight: 600; }
+[data-testid="stTab"] .react-aria-SelectionIndicator {
+  position: absolute !important; inset: 0 !important; height: auto !important; width: auto !important;
+  border-radius: 999px !important; background: var(--texto) !important; z-index: -1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+[role="tabpanel"] { animation: aparecer 0.5s var(--ease) both; padding-top: 0.25rem; }
+
+/* ---------- Expansores ---------- */
+[data-testid="stExpander"] {
+  border-radius: 18px; border: 1px solid var(--vidrio-borde); background: rgba(255, 255, 255, 0.03);
+  overflow: hidden; transition: border-color 0.3s var(--ease);
+}
+[data-testid="stExpander"]:hover { border-color: rgba(255, 255, 255, 0.22); }
+[data-testid="stExpander"] summary { transition: background 0.25s var(--ease); }
+[data-testid="stExpander"] summary:hover { background: rgba(255, 255, 255, 0.05); }
+[data-testid="stExpander"] details[open] > div { animation: aparecer 0.45s var(--ease) both; }
+
+/* ---------- Leyenda del mapa ---------- */
+.leyenda { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.3rem 0 0.9rem; }
+.chip {
+  display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.3rem 0.75rem 0.3rem 0.6rem;
+  border-radius: 999px; font-size: 0.85rem; font-weight: 600; color: var(--c);
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease);
+}
+.chip:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--c) 24%, transparent); }
+.chip b { color: var(--texto); background: rgba(255, 255, 255, 0.12); border-radius: 999px;
+  padding: 0 0.5rem; font-size: 0.78rem; }
+
+/* ---------- Línea de tiempo del itinerario ---------- */
+.tl { list-style: none; margin: 0.4rem 0 1rem; padding: 0 0 0 0.2rem; position: relative; }
+.tl::before {
+  content: ""; position: absolute; left: 22px; top: 14px; bottom: 14px; width: 2px;
+  background: linear-gradient(180deg, #30d158, var(--acento), var(--cafe)); opacity: 0.45;
+  border-radius: 2px;
+}
+.tl > li { margin: 0 !important; padding-left: 0 !important; position: relative; animation: aparecer 0.55s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 55ms); }
+.tl-p { display: flex; align-items: center; gap: 0.8rem; padding: 0.3rem 0;
+  transition: transform 0.3s var(--ease); }
+.tl-p:hover { transform: translateX(5px); }
+.tl-ico {
+  position: relative; z-index: 1; display: grid; place-items: center; width: 40px; height: 40px;
+  border-radius: 50%; color: #fff; background: #1c1c1e; border: 2px solid var(--acento);
+  box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.12); flex: none;
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.tl-p:hover .tl-ico { box-shadow: 0 0 0 7px rgba(10, 132, 255, 0.2); transform: scale(1.08); }
+.tl-p.inicio .tl-ico, .tl-p.fin .tl-ico { border-color: #30d158; box-shadow: 0 0 0 4px rgba(48, 209, 88, 0.14); }
+.tl-n {
+  position: absolute; right: -6px; top: -6px; min-width: 18px; height: 18px; border-radius: 99px;
+  background: var(--cafe); color: #000; font: 700 0.68rem/18px var(--fuente); text-align: center;
+}
+.tl-txt { display: grid; line-height: 1.25; }
+.tl-txt b { font-size: 0.98rem; letter-spacing: -0.01em; }
+.tl-txt small { color: var(--texto-2); font-size: 0.8rem; }
+.tl > .tl-t { padding: 0.1rem 0 0.1rem 3.5rem !important; }
+.tl-viaje {
+  display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 600;
+  color: var(--texto-2); padding: 0.18rem 0.6rem; border-radius: 99px;
+  background: rgba(255, 255, 255, 0.06); border: 1px dashed rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- Barra de jornada y contador ---------- */
+.limite { margin: 0.2rem 0 0.4rem; }
+.limite-cab { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--texto-2); }
+.limite-cab b { color: var(--texto); }
+.limite-pista { height: 8px; border-radius: 99px; background: rgba(255, 255, 255, 0.1);
+  margin-top: 0.35rem; overflow: hidden; }
+.limite-pista i {
+  display: block; height: 100%; width: var(--w); border-radius: 99px;
+  background: linear-gradient(90deg, #30d158, #0a84ff); animation: llenar 1.1s var(--ease) both;
+}
+.limite.alto .limite-pista i { background: linear-gradient(90deg, #ff9f0a, #ffd60a); }
+.limite.excede .limite-pista i { background: linear-gradient(90deg, #ff9f0a, #ff453a); }
+.contador {
+  position: relative; height: 40px; border-radius: 999px; overflow: hidden; display: grid;
+  align-items: center; padding: 0 1rem; background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--vidrio-borde); font-size: 0.88rem; font-weight: 600;
+}
+.contador i {
+  position: absolute; inset: 0 auto 0 0; width: var(--w); background: rgba(10, 132, 255, 0.28);
+  transition: width 0.6s var(--ease);
+}
+.contador.ok i { background: rgba(48, 209, 88, 0.3); }
+.contador span { position: relative; }
+
+/* ---------- Tablas con barras de datos ---------- */
+.tabla-envoltura {
+  border-radius: 18px; border: 1px solid var(--vidrio-borde); overflow: auto; max-height: 420px;
+  background: rgba(255, 255, 255, 0.025);
+}
+.tabla-datos { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.9rem; }
+.tabla-datos th {
+  position: sticky; top: 0; z-index: 1; text-align: left; padding: 0.7rem 1rem;
+  font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--texto-2); background: rgba(28, 28, 30, 0.96); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--vidrio-borde); white-space: nowrap;
+}
+.tabla-datos th, .tabla-datos td { border-left: none !important; border-right: none !important; border-top: none !important; }
+.tabla-datos td { padding: 0.6rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  white-space: nowrap; }
+.tabla-datos tbody tr { animation: aparecer 0.5s var(--ease) both; animation-delay: calc(var(--i) * 35ms);
+  transition: background 0.2s var(--ease); }
+.tabla-datos tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+.tabla-datos tbody tr:hover { background: rgba(10, 132, 255, 0.14); }
+.tabla-datos tbody tr:last-child td { border-bottom: none; }
+.tabla-datos td.num { text-align: right; font-variant-numeric: tabular-nums; position: relative; }
+.tabla-datos .barra {
+  position: absolute; inset: 7px 0.6rem 7px auto; width: calc(var(--w) * 0.9); max-width: 90%;
+  border-radius: 6px; background: linear-gradient(270deg, rgba(10, 132, 255, 0.4), rgba(10, 132, 255, 0.05));
+  transform-origin: right; animation: crecer 0.9s var(--ease) both;
+}
+.tabla-datos .v { position: relative; font-weight: 600; }
+
+/* ---------- Gráficas ---------- */
+[data-testid="stVegaLiteChart"], [data-testid="stArrowVegaLiteChart"] {
+  animation: aparecer 0.7s var(--ease) both; border-radius: 16px;
+}
+
+/* ---------- Transición entre vistas ---------- */
+.stMainBlockContainer [data-testid="stVerticalBlockBorderWrapper"] {
+  animation: aparecer 0.6s var(--ease) both;
+}
+.stMainBlockContainer [data-testid="stVerticalBlockBorderWrapper"]:nth-of-type(2) { animation-delay: 70ms; }
+.stMainBlockContainer [data-testid="stVerticalBlockBorderWrapper"]:nth-of-type(3) { animation-delay: 140ms; }
+/* Mientras Streamlit recalcula, el contenido anterior se desvanece en vez de saltar. */
+[data-stale="true"] { opacity: 0.4; filter: blur(2px) saturate(0.7); transition: opacity 0.3s, filter 0.3s; }
+
+/* ---------- Animaciones ---------- */
+@keyframes subir {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(16px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes abrir {
+  from { opacity: 0; transform: translateY(-10px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes llenar { from { width: 0; } }
+@keyframes crecer { from { transform: scaleX(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 640px) {
+  .block-container { padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem; }
+  div[role="radiogroup"] { display: flex; width: 100%; }
+  div[role="radiogroup"] label[data-testid="stRadioOption"] {
+    flex: 1 1 auto; padding-inline: 0.5rem; font-size: 0.88rem;
+  }
+  [data-testid="stVerticalBlockBorderWrapper"] { padding: 1rem; }
+}
+
+/* Las métricas de las tarjetas de recorrido no deben cortarse con "…". */
+[data-testid="stMetricValue"] { font-size: 1.5rem !important; }
+[data-testid="stMetricValue"] > div, [data-testid="stMetricLabel"] > div {
+  white-space: normal !important; overflow: visible !important; text-overflow: clip !important;
+}

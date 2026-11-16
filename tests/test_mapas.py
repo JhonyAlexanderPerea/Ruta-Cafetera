@@ -1,0 +1,70 @@
+"""Pruebas de los mapas Folium: se renderizan y llevan lo que la interfaz promete."""
+
+import pytest
+
+from rutas.report import mapas
+from rutas.report.iconos import CATEGORIAS, estilo_categoria, svg
+
+ORIGEN = {"nombre": "Plaza <b>", "municipio": "Armenia", "lat": 4.5, "lon": -75.6}
+DESTINO = {"nombre": "Mirador", "municipio": "Filandia", "lat": 4.6, "lon": -75.65}
+RUTA = [(4.5, -75.6), (4.55, -75.62), (4.6, -75.65)]
+
+
+def _html(m) -> str:
+    return m.get_root().render()
+
+
+def test_mapa_ruta_tiene_brillo_animado_y_extremos():
+    out = _html(mapas.mapa_ruta(RUTA, ORIGEN, DESTINO))
+    assert "ruta-viva" in out and "Origen" in out and "Destino" in out
+
+
+def test_tooltips_escapan_el_nombre():
+    out = _html(mapas.mapa_ruta(RUTA, ORIGEN, DESTINO))
+    assert "Plaza <b>" not in out and "Plaza &lt;b&gt;" in out
+
+
+def test_mapa_exploracion_inyecta_el_script_con_los_puntos():
+    m = mapas.mapa_exploracion(RUTA, RUTA, ORIGEN, DESTINO)
+    out = _html(m)
+    assert m.get_name() in out and "Nodos explorados por Dijkstra" in out
+    assert "__MAPA__" not in out and "__PUNTOS__" not in out
+
+
+@pytest.mark.parametrize("poligono,vertices", [(True, True), (False, False)])
+def test_mapa_envolvente_respeta_las_capas(poligono, vertices):
+    lug = [{"nombre": "A", "municipio": "M", "categoria": "finca", "lat": 4.5, "lon": -75.6}]
+    out = _html(mapas.mapa_envolvente(RUTA, lug, poligono, vertices))
+    assert ("hull-viva" in out.split("</style>", 1)[1]) is poligono
+    assert ("Vértice 1" in out) is vertices
+
+
+def test_iconos():
+    assert "<svg" in svg("reloj") and "currentColor" in svg("reloj")
+    assert set(CATEGORIAS) == {"cabecera", "atractivo", "finca", "acopio"}
+    assert estilo_categoria("otra")[2] == "pin"
+
+
+def test_mapa_itinerario_numera_paradas_y_dibuja_tramos():
+    paradas = [
+        {"nombre": "Casa", "municipio": "Armenia", "lat": 4.5, "lon": -75.6},
+        {"nombre": "A <i>", "municipio": "Salento", "lat": 4.6, "lon": -75.65},
+    ]
+    legs = [[(4.5, -75.6), (4.6, -75.65)], [(4.6, -75.65), (4.5, -75.6)]]
+    out = _html(mapas.mapa_itinerario(legs, paradas, [30.0, 25.0]))
+    assert "Tramo 1" in out and "Tramo 2" in out and "ruta-viva" in out
+    assert "A <i>" not in out and "A &lt;i&gt;" in out
+
+
+def test_encuadre_centra_y_acerca_mas_cuanto_menor_es_el_area():
+    chico = [(4.50, -75.60), (4.52, -75.58)]
+    grande = [(4.0, -76.0), (5.0, -75.0)]
+    (c_lat, c_lon), z_chico = mapas.encuadre(chico)
+    _, z_grande = mapas.encuadre(grande)
+    assert (c_lat, c_lon) == pytest.approx((4.51, -75.59))
+    assert z_chico > z_grande
+    assert 3 <= z_grande <= 15 and 3 <= z_chico <= 15
+
+
+def test_encuadre_de_un_solo_punto_no_falla():
+    assert mapas.encuadre([(4.5, -75.6)])[1] == 14
