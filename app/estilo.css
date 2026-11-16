@@ -477,3 +477,63 @@ ul[role="listbox"] li[aria-selected="true"] { box-shadow: inset 3px 0 0 var(--ac
 [data-testid="stMetricValue"] > div, [data-testid="stMetricLabel"] > div {
   white-space: normal !important; overflow: visible !important; text-overflow: clip !important;
 }
+
+
+
+/* ---------- Selector de recorrido ---------- */
+
+/* Contenedor exclusivo de este selector */
+.st-key-mapa_recorrido div[role="radiogroup"] {
+    display: inline-flex !important;
+    width: fit-content;
+    gap: 4px !important;
+    padding: 4px !important;
+    border-radius: 999px !important;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--vidrio-borde) !important;
+}
+
+/* Opciones */
+.st-key-mapa_recorrido label[data-testid="stRadioOption"] {
+    border-radius: 999px !important;
+    border: 1px solid transparent !important;
+    min-height: 40px;
+    padding: 0.4rem 1rem !important;
+    background: transparent !important;
+    transition: all 0.3s var(--ease);
+}
+
+/* Opción seleccionada */
+.st-key-mapa_recorrido
+label[data-testid="stRadioOption"]:has(input:checked) {
+    background: rgba(10, 132, 255, 0.14) !important;
+    border-color: var(--acento) !important;
+    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.15);
+}
+
+/* Texto seleccionado */
+.st-key-mapa_recorrido
+label[data-testid="stRadioOption"]:has(input:checked) p {
+    color: var(--acento) !important;
+    font-weight: 600 !important;
+}
+
+/* Texto normal */
+.st-key-mapa_recorrido
+label[data-testid="stRadioOption"] p {
+    color: var(--texto-2) !important;
+}
+
+/* Hover */
+.st-key-mapa_recorrido
+label[data-testid="stRadioOption"]:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Ocultar indicadores nativos */
+.st-key-mapa_recorrido
+label[data-testid="stRadioOption"] > div > div:first-child {
+    display: none !important;
+}
+

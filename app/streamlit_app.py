@@ -358,11 +358,20 @@ def _mapa_itinerario(res: dict, por_id: dict, partida: str) -> None:
         if not (g.exists() and n.exists()):
             st.info("Faltan graph_csr.npz o nodes.csv para dibujar el mapa: " + PISTA + ".")
             return
-        opciones = {"Óptimo · Held-Karp": "heldkarp", "Heurística · voraz": "voraz"}
-        eleccion = st.segmented_control(
-            "Recorrido", list(opciones), default="Óptimo · Held-Karp", key="mapa_recorrido"
+        opciones = {
+            "Óptimo · Held-Karp": "heldkarp",
+            "Heurística · voraz": "voraz",
+        }
+
+        eleccion = st.radio(
+            "Recorrido",
+            list(opciones),
+            index=0,
+            horizontal=True,
+            key="mapa_recorrido",
         )
-        clave = opciones[eleccion or "Óptimo · Held-Karp"]
+
+        clave = opciones[eleccion]
         r = res[clave]
         ids = [partida, *r["orden"], partida]
         legs = tramos(str(g), str(n), tuple(por_id[i]["nodo_idx"] for i in ids))
