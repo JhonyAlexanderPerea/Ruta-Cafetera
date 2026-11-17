@@ -12,7 +12,7 @@ Actualizado: 2026-11-10. Fase actual: **Fase 7 (R5 aplicación), lista para PARA
 | 4. R2 Dijkstra | Hecha, revisión pendiente. No hay PARADA 4 registrada en `docs/decisiones.md` | `specs/r2_caminos_minimos.md`, PR #6 |
 | 5. R3 envolvente | Hecha. PARADA 5 aprobada (D12). Spec escrita; revisión pendiente | `specs/r3_envolvente.md`, PR #7, `results/r3_envolvente.csv` |
 | 6. R4 viajante | Hecha. PARADA 6 aprobada (D13, D14). Spec implementada; revisión pendiente | `specs/r4_recorrido.md`, PR #8 |
-| 7. R5 aplicación | **Lista para PARADA 7**: app, servicios, figuras y tests hechos (169 pasan). Falta que una persona ajena la levante con el README y revise la spec | `specs/r5_aplicacion.md`, PR #9 (abierto) |
+| 7. R5 aplicación | **Lista para PARADA 7**: app, servicios, figuras y tests hechos (208 pasan). Falta que una persona ajena la levante con el README y revise la spec | `specs/r5_aplicacion.md`, PR #9 (abierto) |
 | 8. Documento técnico | Pendiente | Redacción con el grupo |
 
 ## PR
